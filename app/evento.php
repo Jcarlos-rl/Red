@@ -4,15 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class evento extends Model
+class Evento extends Model
 {
-     protected $fillable = [
-      'nombre','organizador','fecha','lugar','tipo','ciudad','horario'  
+    protected $fillable = [
+        'nombre', 'descripcion', 'lugar', 'inicio_registro', 'fin_registro', 'inicio_evento', 'fin_evento', 'categoria'
     ];
-
-    
-    public function proyecto(){
-       return $this->hasMany(App\proyecto);
-    }    
 }
-
