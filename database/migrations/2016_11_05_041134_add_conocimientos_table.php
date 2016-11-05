@@ -16,6 +16,7 @@ class AddConocimientosTable extends Migration
             $table->increments('id');
             $table->string('nombre',40);
             $table->integer('experiencia');
+            $table->string('descripcion');
         });
     }
 
