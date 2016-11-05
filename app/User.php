@@ -23,4 +23,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function proyecto(){
+        return $this->belongsToMany('App\Proyecto');
+    }
+    public function conocimientos(){
+        return $this->belongsToMany('App\Conocimientos');
+    }
 }
