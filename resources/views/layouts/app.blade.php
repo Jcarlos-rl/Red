@@ -40,15 +40,32 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    Entorno Colaborativo
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                </ul>
+               @if (!Auth::guest())
+                <!-- *********************************************************                              <<<<  OJO
+                            Si el usuario no ha iniciado sesion
+                ***********************************************************-->
+                    @if (Auth::user()->is_admin == 1) 
+                         <!-- *********************************************************                              <<<<  OJO
+                                     Si el usuario es ADMIN
+                         ***********************************************************-->
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/home') }}">HomeAdmin</a></li>
+                        </ul>
+                    @else                            
+                         <!-- *********************************************************                              <<<<  OJO
+                                     Si el usuario NO es ADMIN
+                         ***********************************************************-->
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/home') }}">Home</a></li>
+                        </ul>
+                    @endif
+               @endif
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -59,6 +76,9 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                @if (Auth::user()->is_admin == 1)
+                                    [Admin]
+                                @endif
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
