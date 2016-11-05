@@ -27,4 +27,42 @@ class AdminController extends Controller
     {
         return view('/admin/index');
     }
+
+    public function eventos()
+    {
+        return view('/admin/eventos');
+    }
+
+    public function crearEvento(Request $request)
+    {
+        DB::table('eventos')->insert([
+            'nombre' => $request->nombre,
+        ]);
+
+       $evento = DB::table('eventos')->select('id')->where('nombre',$request->nombre)->first(); //regresa un JSON :)
+      
+       return redirect()->action('AdminController@editarEvento', ['id' => $evento->id]);
+    }
+
+    public function editarEvento(Request $request, $id)
+    {
+        $evento = DB::table('eventos')->select('*')->where('id',$id)->first();
+
+        return view('/admin/evento',['evento'=>$evento]);
+    }
+
+    public function guardarCambiosEvento(Request $request, $id)
+    {
+        DB::table('eventos')->where('id',$id)->update([
+            'nombre' => $request->nombre,
+            'lugar'  => $request->lugar,
+            'inicioRegistro' => $request->inicioRegistro,
+            'fin_registro'   => $request->fin_registro,
+            'inicio_evento'  => $request->inicio_evento,
+            'fin_evento'     => $request->fin_evento,
+            'descripcion'    => $request->descripcion
+        ]);
+
+        return 'Cambios guardados exitosamente!';
+    }
 }
