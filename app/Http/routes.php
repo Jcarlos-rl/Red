@@ -19,4 +19,16 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+
+
+
+
+/**
+***       Admin
+**/
+
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
+Route::get('/admin/eventos', ['middleware' => 'admin', 'uses' => 'AdminController@eventos']);
+Route::post('/admin/eventos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearEvento']);
+Route::get('/admin/evento/{id}',['middleware' => 'admin', 'uses' => 'AdminController@editarEvento']);
+Route::post('/admin/evento/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosEvento']);
