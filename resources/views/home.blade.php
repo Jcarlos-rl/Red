@@ -11,7 +11,6 @@
                     You are logged in!
                 </div>
 
-                Roberto estubo aqui!!!
             </div>
         </div>
     </div>
