@@ -18,9 +18,9 @@ class CreateProyectosTable extends Migration
             $table->string('categoria',45);
             $table->string('descripcion',45);
             
-            $table->integer('idEvento')->unsigned()->nullable();
+            $table->integer('idEvento')->nullable();
             $table->foreign('idEvento')->references('id')
-                  ->on('evento')->onDelete('cascade');
+                  ->on('eventos')->onDelete('cascade');
             
         });
     }
