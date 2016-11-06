@@ -58,11 +58,6 @@
                                 <button id="guardarCambios" type="button" class="btn btn-primary form-control" >Guardar Cambios</button>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-2">
-                                <button id="eliminarEvento" class="btn btn-danger form-control" >Eliminar Evento</button>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>
@@ -84,7 +79,7 @@
                     'fin_registro'   : $('input#finRegistroEvento').val(),
                     'inicio_evento'  : $('input#inicioEvento').val(),
                     'fin_evento'     : $('input#finEvento').val(),
-                    'descripcion'    : $('input#descripcionEvento').val()
+                    'descripcion'    : $('textarea#descripcionEvento').val()
                 },
                 beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
                     var token = $('meta[name="csrf_token"]').attr('content');
@@ -95,6 +90,7 @@
                 },
                 success:function(response){
                     alert(response);
+                     window.location.href = '/admin/eventos';
                 }
             });
         });

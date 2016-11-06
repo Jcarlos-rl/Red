@@ -30,7 +30,8 @@ Route::get('/home', 'HomeController@index');
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
 Route::get('/admin/eventos', ['middleware' => 'admin', 'uses' => 'AdminController@eventos']);
 Route::post('/admin/eventos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearEvento']);
-Route::get('/admin/evento/{id}',['middleware' => 'admin', 'uses' => 'AdminController@editarEvento']);
+Route::get('/admin/evento/{id}/editar',['middleware' => 'admin', 'uses' => 'AdminController@editarEvento']);
 Route::post('/admin/evento/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosEvento']);
+Route::get('/admin/evento/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoEvento']);
+Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarEvento']);
 
-//Route::post('/admin/eventos/{orden}',['middleware' => 'admin', 'uses' => 'AdminController@getEventos']);

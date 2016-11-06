@@ -15,13 +15,13 @@ class CreateEventosTable extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre',50);
-            $table->string('descripcion',300);
+            $table->text('descripcion');
             $table->string('lugar',150);
             $table->dateTime('inicioRegistro');
             $table->dateTime('fin_registro');
             $table->dateTime('inicio_evento');
             $table->dateTime('fin_evento');
-            $table->string('categoria',20);
+            $table->string('categoria',30);
         });
     }
 

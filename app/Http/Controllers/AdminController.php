@@ -67,10 +67,16 @@ class AdminController extends Controller
         return 'Cambios guardados exitosamente!';
     }
 
-    /*public function getEventos(Request $request, $orden)
+    public function getInfoEvento(Request $request, $id)
     {
-        $eventos = DB::table('eventos')->select('*')->get();
-
+        $eventos = DB::table('eventos')->select('*')->where('id',$id)->first();
         return json_encode($eventos);
-    }*/
+    }
+
+    public function eliminarEvento(Request $request, $id)
+    {
+        DB::table('eventos')->where('id',$id)->delete();
+
+        return redirect('/admin/eventos');
+    }
 }
