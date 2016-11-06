@@ -32,3 +32,5 @@ Route::get('/admin/eventos', ['middleware' => 'admin', 'uses' => 'AdminControlle
 Route::post('/admin/eventos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearEvento']);
 Route::get('/admin/evento/{id}',['middleware' => 'admin', 'uses' => 'AdminController@editarEvento']);
 Route::post('/admin/evento/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosEvento']);
+
+//Route::post('/admin/eventos/{orden}',['middleware' => 'admin', 'uses' => 'AdminController@getEventos']);

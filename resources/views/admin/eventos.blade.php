@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<meta name="csrf_token" content="{{ csrf_token() }}" /> <!--Se necestia este metadato para poder hacer AJAX, se envia el csrf_token al server para validar que si existe la sesion -->
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -10,7 +10,28 @@
                     <button class="btn btn-success" style="width:100%;" data-toggle="modal" data-target="#crearEvento">Crear Evento</button>
                 </div>
                 <div class="panel-body">
-                        Eventos
+                    <table class="table table-striped">
+                        <thread>
+                            <tr>
+                                <th>#</th>
+                                <th>nombre</th>
+                                <th>inicio_registro</th>
+                                <th>fin_registro</th>
+                                <th>inicio_evento</th>
+                            </tr>
+                        </thread>
+                        <tbody>
+                            @foreach($eventos as $evento)
+                                <tr>
+                                    <th scope="row">{{$evento->id}}</th>
+                                    <th>{{$evento->nombre}}</th>
+                                    <th>{{$evento->inicioRegistro}}</th>
+                                    <th>{{$evento->fin_registro}}</th>
+                                    <th>{{$evento->inicio_evento}}</th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -43,9 +64,37 @@
 
 
 <script>
+/*
     $(document).ready(function(){
-       
+       $.ajax({
+           url : '/admin/eventos/id',
+           type : 'POST',
+           dataType : 'json',
+           beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+           success:function(response){
+                 //alert(response.length);
+                 for(var i=0; i<response.length; i++){
+                     $('tbody').append(
+                         '<tr>'+
+                            '<th scope="row">'+response[i].id+'</th>'+
+                            '<th>'+response[i].nombre+'</th>'+
+                            '<th>'+response[i].inicioRegistro+'</th>'+
+                            '<th>'+response[i].fin_registro+'</th>'+
+                            '<th>'+response[i].inicio_evento+'</th>'+
+                         '</tr>'
+                     );
+                 }
+                 
+           }
+       });
     });
+*/
 </script>
 
 @endsection

@@ -30,7 +30,8 @@ class AdminController extends Controller
 
     public function eventos()
     {
-        return view('/admin/eventos');
+        $eventos = DB::table('eventos')->select('*')->get();
+        return view('/admin/eventos',['eventos'=>$eventos]);
     }
 
     public function crearEvento(Request $request)
@@ -65,4 +66,11 @@ class AdminController extends Controller
 
         return 'Cambios guardados exitosamente!';
     }
+
+    /*public function getEventos(Request $request, $orden)
+    {
+        $eventos = DB::table('eventos')->select('*')->get();
+
+        return json_encode($eventos);
+    }*/
 }
