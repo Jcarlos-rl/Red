@@ -32,3 +32,12 @@ Route::get('/admin/eventos', ['middleware' => 'admin', 'uses' => 'AdminControlle
 Route::post('/admin/eventos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearEvento']);
 Route::get('/admin/evento/{id}',['middleware' => 'admin', 'uses' => 'AdminController@editarEvento']);
 Route::post('/admin/evento/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosEvento']);
+
+
+
+/*User*/
+
+Route::get('/user/proyectos', 'ProyectoController@proyectos');
+Route::post('user/proyectos/crear', 'ProyectoController@crearProyecto');
+Route::get('/user/proyecto/{id}','ProyectoController@editarProyecto');
+Route::post('/user/proyecto/{id}/guardarCambios','ProyectoController@guardarCambiosProyecto');
