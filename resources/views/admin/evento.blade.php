@@ -84,7 +84,7 @@
                     'fin_registro'   : $('input#finRegistroEvento').val(),
                     'inicio_evento'  : $('input#inicioEvento').val(),
                     'fin_evento'     : $('input#finEvento').val(),
-                    'descripcion'    : $('input#descripcionEvento').val()
+                    'descripcion'    : $('textarea#descripcionEvento').val()
                 },
                 beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
                     var token = $('meta[name="csrf_token"]').attr('content');
