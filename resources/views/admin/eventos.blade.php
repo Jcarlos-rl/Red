@@ -171,11 +171,11 @@
              if($(this).attr('value') == 0)
              {
                  $(this).removeClass('btn-danger');
-                 $(this).addClass('btn-primary');
+                 $(this).addClass('btn-success');
                  $(this).attr('value',1);
              }
              else{
-                 $(this).removeClass('btn-primary');
+                 $(this).removeClass('btn-success');
                  $(this).addClass('btn-danger');
                  $(this).attr('value',0);
              }
@@ -193,7 +193,7 @@
                     }
                 },
                  success:function(response){
-                     alert(response);
+                     //alert(response);
                  }
              });
          });

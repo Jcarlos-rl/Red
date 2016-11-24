@@ -11,29 +11,43 @@
 |
 */
 
+/* 
+    Rutas PUBLICAS
+*/
+
+/* OJO.. AQUI no es necesario enviar a un controlador... la informacion sera estatica en las vistas a renderizar */
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+   Rutas de Inicio Sesion
+*/
+
+/* OJO... PROHIBIDO MANIPULAR */
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
-
-
-Route::auth();
-
-Route::get('/home', 'HomeController@index');
-
 Route::get('/redirect', 'SocialAuthController@redirect');
 Route::get('/callback', 'SocialAuthController@callback');
 
 
 
+/*
+    Rutas de USUARIO
+*/
+
+Route::get('/home', 'HomeController@index');
+Route::get('/eventos','HomeController@eventos');
 
 
-/**
-***       Admin
-**/
+
+
+
+/*
+    Rutas de ADMIN
+*/
+
+/*OJO... middleware => admin ... identifica derechos de admin, sino bloquea la ruta... solo usar en rutas de ADMIN */
 
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
 Route::get('/admin/eventos', ['middleware' => 'admin', 'uses' => 'AdminController@eventos']);
