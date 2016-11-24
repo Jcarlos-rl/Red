@@ -56,7 +56,7 @@
                 dataType : 'text',
                 data:{
                     'nombre' : $('input#nombreProyecto').val(),
-                    'descripcion'    : $('textarea#descripcionEvento').val(),
+                    'descripcion'    : $('textarea#descripcionProyecto').val(),
                     'evento_id' : $('input#evento_id').val()
                 },
                 beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
@@ -68,6 +68,7 @@
                 },
                 success:function(response){
                     alert(response);
+                    window.location.href = "../proyectos";
                 }
             });
         });

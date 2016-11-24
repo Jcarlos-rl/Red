@@ -11,6 +11,24 @@
                 </div>
                 <div class="panel-body">
                         Proyectos
+                        <div class="panel-group" id="accordion">
+    @foreach($proyectos as $proyecto)
+    <div class="panel panel-default">
+       <div class="panel-heading">
+          <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#{{$proyecto->id}}">{{$proyecto->nombre}}</a>
+           </h4>
+       </div>
+       <div id="{{$proyecto->id}}" class="panel-collapse collapse in">
+         <div class="panel-body">
+            <div>
+            {{$proyecto->descripcion}}</div>
+            <button type="button" class="btn btn-info" onclick="redirect({{$proyecto->id}})">Ver Proyecto</button>
+         </div>
+        </div>
+    </div>
+    @endforeach 
+   </div>
                 </div>
             </div>
         </div>
@@ -46,6 +64,10 @@
     $(document).ready(function(){
        
     });
+     function redirect(x){
+        var url = "proyecto/ver/"+x;
+        window.location.href = url;
+    }
 </script>
 
 @endsection

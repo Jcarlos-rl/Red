@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use App\Evento;
 
 class EventoController extends Controller
 {
@@ -16,8 +17,9 @@ class EventoController extends Controller
 
      public function eventos(){
          //$eventos = DB::table('eventos')->select('nombre');
-         $eventos = DB::table('eventos')->get();
-         return view('/user/verEventos', compact('eventos'));
+         //$eventos = DB::table('eventos')->get()->paginate(4);
+         $eventos = Evento::orderBy('id','ASC')->paginate(5);
+         return view('/user/verEventos')->with('eventos',$eventos);
 
 
      }

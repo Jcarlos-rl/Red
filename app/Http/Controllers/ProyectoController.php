@@ -18,9 +18,15 @@ class ProyectoController extends Controller
         //
     }
 
+    public function verProyecto(Request $request, $id){
+        $proyecto = DB::table('proyectos')->select('*')->where('id',$id)->first();
+        return view('/user/verProyecto', compact('proyecto'));
+    }
+
 
     public function proyectos(){
-        return view ('/user/proyectos');
+        $proyectos = DB::table('proyectos')->get();
+        return view ('/user/proyectos', compact('proyectos'));
     }
 
     public function crearProyecto(Request $request){

@@ -43,7 +43,7 @@
     </div>
     @endforeach 
    </div>
-   
+   {!! $eventos -> render() !!}
   </div>
   
 </div>
@@ -53,28 +53,6 @@
         var url = "evento/"+x;
         window.location.href = url;
     }
-
-    /* $(document).ready(function(){
-       $('button#{{$evento->nombre}}').click(function(){
-           alert("Hola");
-            $.ajax({
-                url : '/user/proyecto',
-                type: 'POST',
-                dataType : 'text',
-                beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
-                    var token = $('meta[name="csrf_token"]').attr('content');
-
-                    if (token) {
-                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                    }
-                },
-                success:function(response){
-                    alert(response);
-                }
-            });
-        });
-    });
-*/
 </script>
 
 
