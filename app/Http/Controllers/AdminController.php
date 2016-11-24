@@ -53,6 +53,12 @@ class AdminController extends Controller
         return view('/admin/evento',['evento'=>$evento]);
     }
 
+    public function cambiarStatus(Request $request, $id)
+    {
+        $evento = DB::table('eventos')->where('id',$id)->update(['status' => $request->status]);
+        return json_encode('ok');
+    }
+
     public function guardarCambiosEvento(Request $request, $id)
     {
         DB::table('eventos')->where('id',$id)->update([

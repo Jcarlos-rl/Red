@@ -18,18 +18,25 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
+                                <th class="text-center">Status</th>
                             </tr>
                         </thread>
                         <tbody>
                             @foreach($eventos as $evento)
-                                <tr>
+                                <tr class="rowsTabla">
                                     <th scope="row">{{$evento->id}}</th>
                                     <th>{{$evento->nombre}}</th>
                                     <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
                                     <th class="text-right"><i class="fa fa-pencil-square fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
                                     <th class="text-right"><i class="fa fa-trash fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
-                                    <th class="text-right"><input type="checkbox" name="my-checkbox" value="{{$evento->id}}"checked></th>
+                                    <th class="text-center">
+                                        <!-- Single button -->
+                                        <div class="btn-group">
+                                        <button type="button" class="btn statusBtn" style="width:200%;" id="{{$evento->id}}" value="{{$evento->status}}">
+                                           <i class="fa fa-bullseye" aria-hidden="true"></i>
+                                        </button>
+                                        </div>
+                                    </th>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -150,9 +157,46 @@
            $('#eliminarEvento').modal('show');
            $('form#eliminarEvento').attr('action','/admin/evento/'+$(this).attr('value')+'/eliminar');
          });
-    });
-    $("[name='my-checkbox']").bootstrapSwitch(function(evento,stado){
-      alert($(this).attr('value'));
+
+         $('.rowsTabla > th > div > button').each(function(){
+             if($(this).attr('value') == 0){
+                 $(this).addClass("btn-danger");
+             }
+             else{
+                 $(this).addClass("btn-primary");
+             }
+         });
+         $('.rowsTabla > th > div > button').click(function(){
+             //alert($(this).attr('id'));
+             if($(this).attr('value') == 0)
+             {
+                 $(this).removeClass('btn-danger');
+                 $(this).addClass('btn-primary');
+                 $(this).attr('value',1);
+             }
+             else{
+                 $(this).removeClass('btn-primary');
+                 $(this).addClass('btn-danger');
+                 $(this).attr('value',0);
+             }
+             $.ajax({
+                 url:'/admin/evento/'+$(this).attr('id')+'/cambiarStatus',
+                 type:'POST',
+                 dataType:'json',
+                 data:{
+                     'status': $(this).attr('value')
+                 },beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                 success:function(response){
+                     alert(response);
+                 }
+             });
+         });
     });
 </script>
 
