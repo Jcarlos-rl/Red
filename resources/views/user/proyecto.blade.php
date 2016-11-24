@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Evento</label>
                             <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Evento" value="{{$proyecto->evento_id}}">
+                            <input type="number" class="form-control" id="Evento" value="{{$proyecto->evento_id}}">
                             </div>
                         </div>
                         
@@ -56,8 +56,8 @@
                 dataType : 'text',
                 data:{
                     'nombre' : $('input#nombreProyecto').val(),
-                    'descripcion'    : $('input#descripcionProyecto').val(),
-                    'evento_id': $('input#Evento').val();
+                    'descripcion'    : $('textarea#descripcionEvento').val(),
+                    'evento_id' : $('input#evento_id').val()
                 },
                 beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
                     var token = $('meta[name="csrf_token"]').attr('content');
@@ -73,5 +73,4 @@
         });
     });
 </script>
-
 @endsection
