@@ -146,4 +146,13 @@ hr{
 }
 </style>
 @endsection
-
+@section('footer')
+<div>
+    <br>
+    <br>
+    <div class="panel panel-default">
+        <div class="panel-footer">
+            <h5>Copyright &copy;- Entorno Colaborativo 2016</h5>
+        </div>
+    </div>
+@endsection
