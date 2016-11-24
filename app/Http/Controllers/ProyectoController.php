@@ -46,6 +46,15 @@ class ProyectoController extends Controller
             'evento_id'  => $request->evento_id
         ]);
 
+        /*$id_user = Sentry::get_current_user()->id;
+        DB::table('users_proyectos')->insert([
+            'user_id' => $request->$user->$id_user,
+            'proyecto_id'    => $request->$id,
+            'fecha_registro'  => Carbon\Carbon::now(),
+            'rol' => 'LIDER'
+        ]);*/
+
+
         return 'Cambios guardados exitosamente!';
     }
     /**
