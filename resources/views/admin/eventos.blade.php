@@ -18,6 +18,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thread>
                         <tbody>
@@ -25,9 +26,10 @@
                                 <tr>
                                     <th scope="row">{{$evento->id}}</th>
                                     <th>{{$evento->nombre}}</th>
-                                    <th><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
-                                    <th><i class="fa fa-pencil-square fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
-                                    <th><i class="fa fa-trash fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
+                                    <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
+                                    <th class="text-right"><i class="fa fa-pencil-square fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
+                                    <th class="text-right"><i class="fa fa-trash fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
+                                    <th class="text-right"><input type="checkbox" name="my-checkbox" value="{{$evento->id}}"checked></th>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -77,7 +79,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" id="informacionEvento">
-           
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" style="width:100%;" data-dismiss="modal">Cerrar</button>
@@ -109,7 +111,7 @@
     $(document).ready(function(){
 
         $('i.fa-plus-circle').click(function(){
-           $('#verEvento').modal('show'); 
+           $('#verEvento').modal('show');
 
             $.ajax({
                 url : '/admin/evento/'+$(this).attr('value')+'/getInformacion',
@@ -148,10 +150,10 @@
            $('#eliminarEvento').modal('show');
            $('form#eliminarEvento').attr('action','/admin/evento/'+$(this).attr('value')+'/eliminar');
          });
-
-
     });
-
+    $("[name='my-checkbox']").bootstrapSwitch(function(evento,stado){
+      alert($(this).attr('value'));
+    });
 </script>
 
 @endsection

@@ -38,10 +38,11 @@ class AdminController extends Controller
     {
         DB::table('eventos')->insert([
             'nombre' => $request->nombre,
+            'status' => false
         ]);
 
        $evento = DB::table('eventos')->select('id')->where('nombre',$request->nombre)->first(); //regresa un JSON :)
-      
+
        return redirect()->action('AdminController@editarEvento', ['id' => $evento->id]);
     }
 
