@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests;
 
 class AdminController extends Controller
@@ -61,17 +63,26 @@ class AdminController extends Controller
 
     public function guardarCambiosEvento(Request $request, $id)
     {
+        $nombreImagen = "";
+        if($request->hasFile('imagen'))
+        {
+            $nombreImagen = $request->file('imagen')->getClientOriginalName();
+            $request->file('imagen')->move(base_path() . '/public/imagenesEventos/', $nombreImagen);
+        }
+
         DB::table('eventos')->where('id',$id)->update([
-            'nombre' => $request->nombre,
-            'lugar'  => $request->lugar,
-            'inicioRegistro' => $request->inicioRegistro,
-            'fin_registro'   => $request->fin_registro,
-            'inicio_evento'  => $request->inicio_evento,
-            'fin_evento'     => $request->fin_evento,
-            'descripcion'    => $request->descripcion
+                    'nombre' => $request->input('nombreEvento'),
+                    'lugar'  => $request->input('lugarEvento'),
+            'inicioRegistro' => $request->input('inicioRegistroEvento'),
+            'fin_registro'   => $request->input('finRegistroEvento'),
+            'inicio_evento'  => $request->input('inicioEvento'),
+            'fin_evento'     => $request->input('finEvento'),
+            'descripcion'    => $request->input('descripcionEvento'),
+            'nombreImagen'   => $nombreImagen
         ]);
 
-        return 'Cambios guardados exitosamente!';
+
+        return redirect('/admin/eventos');
     }
 
     public function getInfoEvento(Request $request, $id)
