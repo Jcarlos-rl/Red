@@ -163,7 +163,7 @@
                  $(this).addClass("btn-danger");
              }
              else{
-                 $(this).addClass("btn-primary");
+                 $(this).addClass("btn-success");
              }
          });
          $('.rowsTabla > th > div > button').click(function(){
