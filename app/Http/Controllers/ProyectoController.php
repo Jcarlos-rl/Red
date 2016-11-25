@@ -62,6 +62,7 @@ class ProyectoController extends Controller
         ]);*/
 
 
+
         /* $p = new Proyecto($request);
             $p->save();
             $p->users()->attach(Auth:user(),['rol'=>1]);
