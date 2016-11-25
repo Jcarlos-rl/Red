@@ -18,7 +18,7 @@ class EventoController extends Controller
      public function eventos(){
          //$eventos = DB::table('eventos')->select('nombre');
          //$eventos = DB::table('eventos')->get()->paginate(4);
-         $eventos = Evento::orderBy('id','ASC')->paginate(5);
+         $eventos = Evento::orderBy('id','ASC')->where('status',1)->paginate(5);
          return view('/user/verEventos')->with('eventos',$eventos);
 
 
@@ -32,6 +32,13 @@ class EventoController extends Controller
     public function index()
     {
         //
+    }
+
+
+     public function getInfoEvento(Request $request, $id)
+    {
+        $eventos = DB::table('eventos')->select('*')->where('id',$id)->first();
+        return json_encode($eventos);
     }
 
     /**

@@ -68,4 +68,5 @@ Route::post('/user/proyecto/{id}/guardarCambios','ProyectoController@guardarCamb
 Route::get('/user/eventos', 'EventoController@eventos');
 Route::get('/user/evento/{id}', 'EventoController@verEvento');
 Route::get('/user/proyecto/ver/{id}','ProyectoController@verProyecto');
+Route::get('/user/evento/{id}/getInformacion', 'AdminController@getInfoEvento');
 
