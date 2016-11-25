@@ -28,7 +28,7 @@ class ProyectosController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.Proyecto.ViewAgregarP');
     }
 
     /**
@@ -39,7 +39,10 @@ class ProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request-> all());
+        $Proyecto = new Proyecto($request-> all());
+        $Proyecto -> save();
+        return redirect()-> route('user.proyectos.index');
     }
 
     /**
