@@ -3,7 +3,7 @@
 @section('content')
 @php ($rol = $proyecto->users()->find(Auth::user()->id)->pivot->rol)
 <div class="container">
-    <h1>{{$proyecto->nombre}}</h1>
+    <h1>Nombre de Proyecto</h1>
     <div class="row">
       @if($rol == 'ROLE_LEADER')
         <div class="col-md-8">
