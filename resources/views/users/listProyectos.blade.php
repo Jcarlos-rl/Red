@@ -3,6 +3,7 @@
 @section('content')
 
 <h1>Proyectos</h1>
+<a href="{{route('user.proyectos.create')}}" class="btn btn-success">+</a>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
