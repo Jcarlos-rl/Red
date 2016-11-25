@@ -11,7 +11,7 @@
 |
 */
 
-/* 
+/*
     Rutas PUBLICAS
 */
 
@@ -59,3 +59,6 @@ Route::get('/admin/evento/{id}/getInformacion',['middleware' => 'admin', 'uses' 
 Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarEvento']);
 
 
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
+  Route::resource('proyectos','ProyectosController');
+});

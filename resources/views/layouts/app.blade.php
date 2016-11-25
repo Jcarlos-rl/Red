@@ -72,6 +72,9 @@
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/home') }}">Home</a></li>
                         </ul>
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ route('user.proyectos.index') }}">Proyectos</a></li>
+                        </ul>
                     @endif
                @endif
 
