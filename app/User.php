@@ -31,6 +31,6 @@ class User extends Authenticatable
 
     public function proyectos()
     {
-        return $this->belongsToMany('App\Proyecto','users_proyectos','user_id','proyecto_id')->withPivot('rol')->withPivot('fecha_registro');;
+        return $this->belongsToMany('App\Proyecto','users_proyectos','user_id','proyecto_id')->withPivot('rol')->withPivot('fecha_registro');
     }
 }
