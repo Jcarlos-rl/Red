@@ -42,6 +42,7 @@ class ProyectosController extends Controller
         //dd($request-> all());
         $Proyecto = new Proyecto($request-> all());
         $Proyecto -> save();
+        $Proyecto->users()->attach(Auth::user(),['rol' => 'ROLE_LEADER']);
         return redirect()-> route('user.proyectos.index');
     }
 
