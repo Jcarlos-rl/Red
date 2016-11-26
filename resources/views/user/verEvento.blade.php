@@ -9,6 +9,7 @@
 <p>Inicio de Evento: {{$evento->inicio_evento}}</p>
 <p>Fin de Evento: {{$evento->fin_evento}}</p>
 <p>Descripcion: {{$evento->descripcion}}</p>
+<img src="imagenesEventos/{{$evento->nombreImagen}}"/>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
