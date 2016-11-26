@@ -18,7 +18,7 @@ class ProyectosController extends Controller
     public function index()
     {
       $proyectos = Auth::user()->proyectos()->orderBy('id', 'ASC')->paginate(5);
-      return view('users/listProyectos')->with('proyectos', $proyectos);
+      return view('users/Proyecto/listProyectos')->with('proyectos', $proyectos);
     }
 
     /**
@@ -55,7 +55,7 @@ class ProyectosController extends Controller
     public function show($id)
     {
       $proyecto = Proyecto::find($id);
-      return view('users/verProyecto')->with('proyecto', $proyecto);
+      return view('users/Proyecto/verProyecto')->with('proyecto', $proyecto);
     }
 
     /**
