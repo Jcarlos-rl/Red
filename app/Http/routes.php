@@ -11,7 +11,7 @@
 |
 */
 
-/* 
+/*
     Rutas PUBLICAS
 */
 
@@ -59,6 +59,7 @@ Route::get('/admin/evento/{id}/getInformacion',['middleware' => 'admin', 'uses' 
 Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarEvento']);
 
 
+
 /*User*/
 
 Route::get('/user/proyectos', 'ProyectoController@proyectos');
@@ -68,4 +69,9 @@ Route::post('/user/proyecto/{id}/guardarCambios','ProyectoController@guardarCamb
 Route::get('/user/eventos', 'EventoController@eventos');
 Route::get('/user/evento/{id}', 'EventoController@verEvento');
 Route::get('/user/proyecto/ver/{id}','ProyectoController@verProyecto');
+
+
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
+  Route::resource('proyectos','ProyectosController');
+});
 

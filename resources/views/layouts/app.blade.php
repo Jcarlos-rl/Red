@@ -77,6 +77,8 @@
                         </ul>
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/user/eventos') }}">Eventos</a></li>
+                            <li><a href="{{ route('user.proyectos.index') }}">Proyectos</a></li>
+
                         </ul>
                     @endif
                @endif
