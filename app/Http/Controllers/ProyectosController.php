@@ -66,7 +66,8 @@ class ProyectosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $proyecto = Proyecto::find($id);
+        return view('users/Proyecto/ViewEditarP')->with('proyecto', $proyecto);
     }
 
     /**
@@ -78,7 +79,7 @@ class ProyectosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()-> route('user.proyectos.index');
     }
 
     /**
