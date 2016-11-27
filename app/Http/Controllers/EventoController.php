@@ -20,7 +20,7 @@ class EventoController extends Controller
          //$eventos = DB::table('eventos')->select('nombre');
          //$eventos = DB::table('eventos')->get()->paginate(4);
          $eventos = Evento::orderBy('id','ASC')->where('status',1)->paginate(5);
-         return view('/user/verEventos')->with('eventos',$eventos);
+         return view('/users/Evento/verEventos')->with('eventos',$eventos);
 
 
      }
@@ -28,16 +28,20 @@ class EventoController extends Controller
      public function verEvento(Request $request, $id){
          $evento = DB::table('eventos')->select('*')->where('id',$id)->first();
          //$evento = DB::table('eventos')->join('proyectos', 'proyectos.evento_id','=','eventos.id')->select('*')->where('eventos.id',$id)->first();
-        return view('/user/verEvento',['evento'=>$evento]);
+        return view('/users/Evento/verEvento',['evento'=>$evento]);
      }
 
      public function verProyectos(Request $request, $id){
         $proyectos = Proyecto::orderBy('id','ASC')->where('evento_id',$id)->where('status','ACCEPTED')->paginate(5);   
-        return view('user/proyectos')->with('proyectos', $proyectos);
+        return view('users/Evento/proyectos')->with('proyectos', $proyectos);
      }
     public function index()
     {
         //
+    }
+ public function verProyecto1(Request $request, $id){
+        $proyecto = DB::table('proyectos')->select('*')->where('id',$id)->first();
+        return view('/users/Evento/verProyecto', compact('proyecto'));
     }
 
 
@@ -58,7 +62,7 @@ class EventoController extends Controller
     }
     public function verProyecto(Request $request,$id){
         $proyecto = Proyecto::select('*')->where('id',$id)->first();
-        return view('user/verEventos')->with('proyecto', $proyecto);
+        return view('users/Evento/verEventos')->with('proyecto', $proyecto);
 
     }
 
