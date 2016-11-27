@@ -56,6 +56,11 @@ class EventoController extends Controller
     {
         //
     }
+    public function verProyecto(Request $request,$id){
+        $proyecto = Proyecto::select('*')->where('id',$id)->first();
+        return view('user/verEventos')->with('proyecto', $proyecto);
+
+    }
 
     /**
      * Store a newly created resource in storage.

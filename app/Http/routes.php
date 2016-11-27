@@ -71,6 +71,7 @@ Route::get('/user/evento/{id}', 'EventoController@verEvento');
 Route::get('/user/proyecto/ver/{id}','ProyectoController@verProyecto');
 Route::get('/user/evento/{id}/getInformacion', 'AdminController@getInfoEvento');
 Route::get('user/evento/{id}/proyecto', 'EventoController@verProyectos');
+Route::get('user/evento/proyecto/{id}, EventoController@verProyecto');
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::resource('proyectos','ProyectosController');

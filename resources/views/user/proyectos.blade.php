@@ -70,7 +70,7 @@
        
     });
      function redirect(x){
-        var url = "../../proyectos/";
+        var url = "../proyecto/"+x;
         window.location.href = url;
     }
 </script>
