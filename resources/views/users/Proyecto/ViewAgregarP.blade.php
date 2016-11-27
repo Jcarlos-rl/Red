@@ -17,11 +17,6 @@
                     {!! Form::label('Descripcion', 'Descipcion') !!}
                     {!! Form::text('descripcion', null, ['class' => 'form-control', 'placeholder' => 'Descripcion...']) !!}
                   </div>
-                  <label class="col-md-4 control-label">Nuevo Archivo</label>
-                               <div class="col-md-6">
-                                 <input type="file" class="form-control" name="file" >
-                               </div>
-                             </div>
                   <div class="form-group">
                     {!! Form::submit('Agregar', ['class' => 'btn btn-success']) !!}
                   </div>

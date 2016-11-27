@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}">
+@endsection
 @section('content')
 @php ($rol = $proyecto->users()->find(Auth::user()->id)->pivot->rol)
 <div class="container">
@@ -22,10 +24,9 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                   <h3>Buscar Colaborador</h3>
-                  {!! Form::open(['method' => 'POST']) !!}
                   <div class="form-group">
                     {!! Form::label('nombre', 'nombre') !!}
-                    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre...']) !!}
+                    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre...', 'id' => 'collaboratorText', 'autocomplete'=>'off']) !!}
                   </div>
                   <table class="table table-striped">
                     <thread>
@@ -33,13 +34,12 @@
                             <th class="text-center">Nombre</th>
                         </tr>
                     </thread>
-                    <tbody>
+                    <tbody id="collaborators">
                     </tbody>
                   </table>
                   <div class="form-group">
-                    {!! Form::submit('Invitar', ['class' => 'btn btn-success']) !!}
+                    <button class="btn btn-success" type="button" name="button" id="btnSend">Invitar</button>
                   </div>
-                  {!! Form::close() !!}
                 </div>
             </div>
         </div>
@@ -77,5 +77,14 @@
         </div>
     </div>
 </div>
-
+@endsection
+@section('javascripts')
+  <script src="{{ asset('js/jquery-ui.min.js') }}" charset="utf-8"></script>
+  <script src="{{ asset('js/md5.min.js') }}" charset="utf-8"></script>
+  <script src="{{ asset('js/proyectos/search-collaborator.js') }}" charset="utf-8"></script>
+  <script src="{{ asset('js/proyectos/send-invitation.js') }}" charset="utf-8"></script>
+  <script type="text/javascript">
+    var token = '{{ Session::token() }}';
+    var template = '@include("users/templates/filaColaborador")';
+  </script>
 @endsection
