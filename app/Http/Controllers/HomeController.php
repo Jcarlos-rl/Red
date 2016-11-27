@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Evento;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,13 +25,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('home');
-    }
+     
     public function eventos()
     {
          $eventos = Evento::orderBy('id','ASC')->where('status',1)->paginate(5);
          return view('/user/verEventos')->with('eventos',$eventos);
+    }
+
+    public function configuracion()
+    {
+        return view('users/configuracionCuenta',['user' => Auth::user()]);
+    }
+
+    public function actualizaDatosUsuario(Request $request)
+    {
+        DB::table('users')->where('email',Auth::user()->email)->update(['name'=>$request->nombre]);
+        return json_encode("Datos Actualizados correctamente");
     }
 }

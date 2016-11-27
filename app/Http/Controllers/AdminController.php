@@ -97,4 +97,92 @@ class AdminController extends Controller
 
         return redirect('/admin/eventos');
     }
+	
+	//-------------------------------------------------------------------------------------//
+	public function proyectos()
+    {
+        $proyectos = DB::table('proyectos')->select('*')->get();
+        return view('/admin/proyectos',['proyectos'=>$proyectos]);
+    }
+
+    public function crearProyecto(Request $request)
+    {
+        DB::table('proyectos')->insert([
+            'nombre' => $request->nombre,
+        ]);
+
+       $proyecto = DB::table('proyectos')->select('id')->where('nombre',$request->nombre)->first(); //regresa un JSON :)
+      
+       return redirect()->action('AdminController@editarProyecto', ['id' => $proyecto->id]);
+    }
+
+    public function editarProyecto(Request $request, $id)
+    {
+        $proyecto = DB::table('proyectos')->select('*')->where('id',$id)->first();
+
+        return view('/admin/proyecto',['proyecto'=>$proyecto]);
+    }
+
+    public function guardarCambiosProyecto(Request $request, $id)
+    {
+        DB::table('proyectos')->where('id',$id)->update([
+            'nombre' => $request->nombre,
+            'descripcion'  => $request->descripcion,
+            'evento_id' => $request->evento_id			
+        ]);
+
+        return 'Cambios guardados exitosamente!';
+    }
+
+    public function getInfoProyecto(Request $request, $id)
+    {
+        $proyectos = DB::table('proyectos')->select('*')->where('id',$id)->first();
+        return json_encode($proyectos);
+    }
+
+    public function eliminarProyectos(Request $request, $id)
+    {
+        DB::table('proyectos')->where('id',$id)->delete();
+
+        return redirect('/admin/proyectos');
+    }
+	
+	//Admin users
+	//-------------------------------------------------------------------------------------//
+	public function users()
+    {
+        $users = DB::table('users')->select('*')->get();
+        return view('/admin/users',['users'=>$users]);
+    }
+
+    public function editarUsers(Request $request, $id)
+    {
+        $user = DB::table('users')->select('*')->where('id',$id)->first();
+
+        return view('/admin/user',['user'=>$user]);
+    }
+
+    public function guardarCambiosUsers(Request $request, $id)
+    {
+        DB::table('users')->where('id',$id)->update([
+            'name' => $request->name,
+            'correo'  => $request->correo,
+            'roles' => $request->roles			
+        ]);
+
+        return 'Cambios guardados exitosamente!';
+    }
+
+    public function getInfoUsers(Request $request, $id)
+    {
+        $user = DB::table('users')->select('*')->where('id',$id)->first();
+        return json_encode($user);
+    }
+
+    public function eliminarUsers(Request $request, $id)
+    {
+        DB::table('user')->where('id',$id)->delete();
+
+        return redirect('/admin/users');
+    }
 }
