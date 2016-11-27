@@ -42,8 +42,8 @@
                                         <div class="btn-group">
                                           @if($proyecto->pivot->rol == 'ROLE_LEADER')
                                             <a href="{{route('user.proyectos.show',$proyecto->id)}}" class="btn btn-success btn-md">Ver</a>
-                                            <a href="#" class="btn btn-primary btn-md">Editar</a>
-                                            <a href="#" class="btn btn-danger btn-md btn-delete">Eliminar</a>
+                                            <a href="{{route('user.proyectos.edit',$proyecto->id)}}" class="btn btn-primary btn-md">Editar</a>
+                                            <a href="#" class="btn btn-danger btn-md">Eliminar</a>
                                           @else
                                             <a href="{{route('user.proyectos.show',$proyecto->id)}}" class="btn btn-success btn-md">Ver</a>
                                           @endif
