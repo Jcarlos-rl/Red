@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-@php ($rol = $proyecto->users()->find(Auth::user()->id)->pivot->rol)
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-body">
-                  {!! Form::open(['route'=>[ 'user.proyectos.update','{{$id}}'],'method' => 'PUT']) !!}
+                  {!! Form::open(['route'=>[ 'user.proyectos.update',$proyecto],'method' => 'PUT']) !!}
                   <div class="form-group">
                   <h1> Titulo del Proyecto </h1>
                     {!! Form::text('nombre',$proyecto->nombre, ['class' => 'form-control']) !!}
