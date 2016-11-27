@@ -34,4 +34,13 @@ Route::post('/admin/evento/{id}/guardarCambios',['middleware' => 'admin','uses' 
 Route::get('/admin/evento/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoEvento']);
 Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarEvento']);
 
+Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
+Route::get('/admin/proyectos', ['middleware' => 'admin', 'uses' => 'AdminController@proyectos']);
+Route::post('/admin/proyectos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearProyecto']);
+Route::get('/admin/proyecto/{id}/editar',['middleware' => 'admin', 'uses' => 'AdminController@editarProyecto']);
+Route::post('/admin/proyecto/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosProyecto']);
+Route::get('/admin/proyecto/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoProyecto']);
+Route::post('/admin/proyecto/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarProyecto']);
+
+
 

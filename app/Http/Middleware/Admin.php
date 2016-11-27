@@ -20,7 +20,7 @@ class Admin
 				return redirect()->guest('login');
 			}
         } 
-		else if (Auth::guard($guard)->user()->roles!='aa' && Auth::guard($guard)->user()->roles!='ae') 
+		else if (Auth::guard($guard)->user()->roles!='aa' && Auth::guard($guard)->user()->roles!='ae' && Auth::guard($guard)->user()->roles!='ap') 
 		{
 			return redirect()->to('/')->withError('Permission Denied');
         }
