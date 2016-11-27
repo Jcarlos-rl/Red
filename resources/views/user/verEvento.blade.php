@@ -15,23 +15,23 @@
             </div>
             <div class="panel-body">
                 <div class="col-sm-8">
+                    <div>
                     {{$evento->descripcion}}
-                     <br/> <button class="btn btn-success" value="{{$evento->id}}" onclick="redirect(1)">Ver Proyectos</button>
+                    </div>
+                    <br/>
+                    <div class="text-bottom">
+                    <button class="btn btn-success" id="proyectos">Ver Proyectos</button>
+                    </div>
                 </div>
-                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}" onclick="redirect({{$evento->id}})"></i>
-                  
-
-                <div class="col-sm-3">
-                    <img src="{{ asset( 'imagenesEventos/' . $evento->nombreImagen)}}" style ="height:250px;">
+                  <div class="col-sm-3">
+                    <img src="{{ asset( 'imagenesEventos/' . $evento->nombreImagen)}}" style ="height:13em; ">
                 </div>
             </div>
         </div>
     </div>
-    <button onclick="hola()">Hola</button>
     <div class="panel-group">
         <div class="panel panel-success">
             <div class="panel-heading">
-            <i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}" onclick="redirect()"></i>
                 Lugar
             </div>
             <div class="panel-body">
@@ -82,10 +82,12 @@
 </div>
 
 <script>
-
-    function redirect(){
-        alert("HOLA";)
-    }
+    $(document).ready(function(){
+        $('#proyectos').click(function(){
+            window.location.href="{{$evento->id}}/proyecto";
+        });
+    });
+ 
 </script>
 
 
