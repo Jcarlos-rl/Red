@@ -17,7 +17,7 @@
                   <textarea name="descripcion" rows="8" cols="80">{{$proyecto->descripcion}}</textarea>
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
     <div class="form-group">
       {!! Form::submit('Actualizar', ['class' => 'btn btn-success']) !!}
