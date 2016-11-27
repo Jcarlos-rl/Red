@@ -162,7 +162,14 @@
                             },
                             success:function(response)
                             {
-                               actualizaListaConocimientos();
+                                $('datalist#conocimientos').empty();
+                               //alert(JSON.stringify(response));
+                                for(var i=0; i<response.length; i++)
+                                {
+                                    $('datalist#conocimientos').append(
+                                        '<option value="'+response[i].nombre+'"></option>'
+                                    );
+                                }
                             }
                        });
                    });
