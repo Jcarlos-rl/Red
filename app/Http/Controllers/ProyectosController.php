@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use App\Proyecto;
+use App\User;
 
 class ProyectosController extends Controller
 {
@@ -104,5 +105,30 @@ class ProyectosController extends Controller
       }
       flash('proyecto '.$nombre.' eliminado exitosamente', 'success');
       return redirect()->route('user.proyectos.index');
+    }
+
+    public function searchUser(Request $request)
+    {
+      if ($request->ajax()) {
+        $data = User::where('name', 'LIKE', "%$request->name%")->get();
+        $users = array();
+        foreach ($data as $user) {
+          array_push($users,['value' => $user->email, 'label' => $user->name]);
+        }
+        return response()->json([
+          'users' => $users
+        ]);
+      }
+    }
+
+    public function sendEmails(Request $request)
+    {
+      if ($request->ajax()) {
+        $texto = '';
+        foreach ($request->emails as $email) {
+          $texto .= $email.' ';
+        }
+        return $texto;
+      }
     }
 }
