@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests;
 
 class AdminController extends Controller
@@ -38,10 +40,11 @@ class AdminController extends Controller
     {
         DB::table('eventos')->insert([
             'nombre' => $request->nombre,
+            'status' => false
         ]);
 
        $evento = DB::table('eventos')->select('id')->where('nombre',$request->nombre)->first(); //regresa un JSON :)
-      
+
        return redirect()->action('AdminController@editarEvento', ['id' => $evento->id]);
     }
 
@@ -52,19 +55,34 @@ class AdminController extends Controller
         return view('/admin/evento',['evento'=>$evento]);
     }
 
+    public function cambiarStatus(Request $request, $id)
+    {
+        $evento = DB::table('eventos')->where('id',$id)->update(['status' => $request->status]);
+        return json_encode('ok');
+    }
+
     public function guardarCambiosEvento(Request $request, $id)
     {
+        $nombreImagen = "";
+        if($request->hasFile('imagen'))
+        {
+            $nombreImagen = $request->file('imagen')->getClientOriginalName();
+            $request->file('imagen')->move(base_path() . '/public/imagenesEventos/', $nombreImagen);
+        }
+
         DB::table('eventos')->where('id',$id)->update([
-            'nombre' => $request->nombre,
-            'lugar'  => $request->lugar,
-            'inicioRegistro' => $request->inicioRegistro,
-            'fin_registro'   => $request->fin_registro,
-            'inicio_evento'  => $request->inicio_evento,
-            'fin_evento'     => $request->fin_evento,
-            'descripcion'    => $request->descripcion
+                    'nombre' => $request->input('nombreEvento'),
+                    'lugar'  => $request->input('lugarEvento'),
+            'inicioRegistro' => $request->input('inicioRegistroEvento'),
+            'fin_registro'   => $request->input('finRegistroEvento'),
+            'inicio_evento'  => $request->input('inicioEvento'),
+            'fin_evento'     => $request->input('finEvento'),
+            'descripcion'    => $request->input('descripcionEvento'),
+            'nombreImagen'   => $nombreImagen
         ]);
 
-        return 'Cambios guardados exitosamente!';
+
+        return redirect('/admin/eventos');
     }
 
     public function getInfoEvento(Request $request, $id)
@@ -87,48 +105,18 @@ class AdminController extends Controller
         return view('/admin/proyectos',['proyectos'=>$proyectos]);
     }
 
-    public function crearProyecto(Request $request)
-    {
-        DB::table('proyectos')->insert([
-            'nombre' => $request->nombre,
-        ]);
-
-       $proyecto = DB::table('proyectos')->select('id')->where('nombre',$request->nombre)->first(); //regresa un JSON :)
-      
-       return redirect()->action('AdminController@editarProyecto', ['id' => $proyecto->id]);
-    }
-
-    public function editarProyecto(Request $request, $id)
-    {
-        $proyecto = DB::table('proyectos')->select('*')->where('id',$id)->first();
-
-        return view('/admin/proyecto',['proyecto'=>$proyecto]);
-    }
-
-    public function guardarCambiosProyecto(Request $request, $id)
-    {
-        DB::table('proyectos')->where('id',$id)->update([
-            'nombre' => $request->nombre,
-            'descripcion'  => $request->descripcion,
-            'evento_id' => $request->evento_id			
-        ]);
-
-        return 'Cambios guardados exitosamente!';
-    }
-
     public function getInfoProyecto(Request $request, $id)
     {
         $proyectos = DB::table('proyectos')->select('*')->where('id',$id)->first();
         return json_encode($proyectos);
     }
 
-    public function eliminarProyectos(Request $request, $id)
+    public function cambiarStatusProyecto(Request $request, $id)
     {
-        DB::table('proyectos')->where('id',$id)->delete();
-
-        return redirect('/admin/proyectos');
+        $evento = DB::table('proyectos')->where('id',$id)->update(['status' => $request->status]);
+        return json_encode('ok');
     }
-
+	
 	//Admin users
 	//-------------------------------------------------------------------------------------//
 	public function users()
