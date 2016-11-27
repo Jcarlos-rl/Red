@@ -146,4 +146,43 @@ class AdminController extends Controller
 
         return redirect('/admin/proyectos');
     }
+	
+	//Admin users
+	//-------------------------------------------------------------------------------------//
+	public function users()
+    {
+        $users = DB::table('users')->select('*')->get();
+        return view('/admin/users',['users'=>$users]);
+    }
+
+    public function editarUsers(Request $request, $id)
+    {
+        $user = DB::table('users')->select('*')->where('id',$id)->first();
+
+        return view('/admin/user',['user'=>$user]);
+    }
+
+    public function guardarCambiosUsers(Request $request, $id)
+    {
+        DB::table('users')->where('id',$id)->update([
+            'name' => $request->name,
+            'correo'  => $request->correo,
+            'roles' => $request->roles			
+        ]);
+
+        return 'Cambios guardados exitosamente!';
+    }
+
+    public function getInfoUsers(Request $request, $id)
+    {
+        $user = DB::table('users')->select('*')->where('id',$id)->first();
+        return json_encode($user);
+    }
+
+    public function eliminarUsers(Request $request, $id)
+    {
+        DB::table('user')->where('id',$id)->delete();
+
+        return redirect('/admin/users');
+    }
 }

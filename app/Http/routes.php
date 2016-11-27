@@ -70,3 +70,15 @@ Route::get('/admin/proyecto/{id}/editar',['middleware' => 'admin', 'uses' => 'Ad
 Route::post('/admin/proyecto/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosProyecto']);
 Route::get('/admin/proyecto/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoProyecto']);
 Route::post('/admin/proyecto/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarProyecto']);
+
+/**
+***       Admin users
+**/
+
+Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
+Route::get('/admin/users', ['middleware' => 'admin', 'uses' => 'AdminController@users']);
+//Route::post('/admin/users/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearProyecto']);
+Route::get('/admin/user/{id}/editar',['middleware' => 'admin', 'uses' => 'AdminController@editarUsers']);
+Route::post('/admin/user/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosUsers']);
+Route::get('/admin/user/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoUsers']);
+Route::post('/admin/user/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarUsers']);
