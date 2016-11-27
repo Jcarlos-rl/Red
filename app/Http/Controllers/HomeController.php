@@ -41,4 +41,44 @@ class HomeController extends Controller
         DB::table('users')->where('email',Auth::user()->email)->update(['name'=>$request->nombre]);
         return json_encode("Datos Actualizados correctamente");
     }
+
+    public function getConocimientos()
+    {
+        $conocimientos = DB::table('conocimientos')->select('*')->get();
+        return json_encode($conocimientos);
+    }
+
+    public function actualizaConocimientos(Request $request)
+    {
+        //Existe actualmente este conocimiento?
+        $existeConocimiento = DB::table('conocimientos')->where('nombre',$request->conocimiento)->select('id')->get();
+        if(!sizeOf($existeConocimiento)>0) //Si no existe entonces lo guardo
+        {
+           DB::table('conocimientos')->insert([
+               'nombre' => $request->conocimiento
+           ]);
+        }       
+        //Necesito el id del usuario para otorgarle el conocimiento 
+        $idUser = DB::table('users')->where('email',Auth::user()->email)->select('id')->first();
+
+        //Necesito el id del conocimiento para otorgarle el usuario
+        $idConocimiento = DB::table('conocimientos')->where('nombre',$request->conocimiento)->select('id')->first();
+
+        //El usuario actualmente ya cuenta con este conocimiento?
+        $yaTieneConocimiento = DB::table('users')->join('users_conocimientos','users.id','=','users_conocimientos.user_id')
+                                                 ->join('conocimientos','conocimientos.id','=','users_conocimientos.conocimiento_id')
+                                                 ->where('users_conocimientos.user_id','users.id')->select('users.id')->get();
+        if(!sizeOf($yaTieneConocimiento)) //Si no tiene este conocimiento entonces
+        {
+            //Guardo el conocimiento al usuario en tabla users_conocimientos
+            DB::table('users_conocimientos')->insert([
+                'user_id' => $idUser->id,
+                'conocimiento_id' => $idConocimiento->id
+            ]);
+        }
+
+        //Actualizo los conocimientos al usuario 
+        $conocimientos = DB::table('conocimientos')->select('*')->get();
+        return json_encode($conocimientos);
+    }
 }

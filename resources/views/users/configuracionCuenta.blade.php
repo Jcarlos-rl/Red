@@ -4,10 +4,9 @@
 <meta name="csrf_token" content="{{ csrf_token() }}" /> <!--Se necestia este metadato para poder hacer AJAX, se envia el csrf_token al server para validar que si existe la sesion -->
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-align:center;">Datos Personales</div>
-
                 <div class="panel-body">
                    <form class="form-horizontal">
                         <div class="form-group">
@@ -32,8 +31,99 @@
                     </form>
                 </div>
             </div>
-            <script>
+            <div class="panel panel-default">
+                <div class="panel-heading" style="text-align:center;">Cambiar Contraseña</div>
+
+                <div class="panel-body">
+                   <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Actual</label>
+                            <div class="col-sm-10">
+                            <input type="password" class="form-control" name="constraActualUsuario" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nueva</label>
+                            <div class="col-sm-10">
+                            <input type="password" class="form-control" name="contraNuevaUsuario" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Repite</label>
+                            <div class="col-sm-10">
+                            <input type="password" class="form-control" name="contraNuevaUsuarioOK" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button id="guardarCambios" type="button" class="btn btn-warning form-control" >Guardar Cambios</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <button id="guardarCambios" type="button" class="btn btn-danger form-control" >Eliminar Cuenta</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+                <div class="panel panel-default">
+                        <div class="panel-heading" style="text-align:center;">Conocimientos</div>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" list="conocimientos" id="inputConocimiento">
+                                                <datalist id="conocimientos"> 
+                                                </datalist>
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-success" id="agregarConocimiento">Agregar</button>
+                                            </div><!-- /btn-group -->
+                                        </div><!-- /input-group -->
+                                    </div> 
+                                    <div class="col-md-10 col-md-offset-1" id="listaConocimientosUsuario">
+                                    </div>                                  
+                                </div>
+                            </form>
+                        </div>
+                </div>
+         </div>
+    </div>
+</div>
+
+             <script>
+                   var actualizaListaConocimientos = function(){
+                       $.ajax({
+                            url:'/getConocimientos',
+                            type : 'POST',
+                            dataType: 'json',
+                            beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                                var token = $('meta[name="csrf_token"]').attr('content');
+                                if (token) {
+                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                                }
+                            },
+                            success:function(response)
+                            {
+                                //alert(JSON.stringify(response));
+                                for(var i=0; i<response.length; i++)
+                                {
+                                    $('datalist#conocimientos').append(
+                                        '<option value="'+response[i].nombre+'"></option>'
+                                    );
+                                }
+                            }             
+                        });
+                   }
                 $(document).ready(function(){
+                   actualizaListaConocimientos();
+                   $(window).keydown(function(event){
+                        if(event.keyCode == 13) {
+                        event.preventDefault();
+                        return false;
+                        }
+                    });
                    $('button#guardarDatosPersonales').click(function(){
                         $.ajax({
                             url:'/user/actualizaDatosUsuario',
@@ -55,43 +145,28 @@
                             }
                         });
                    });
+                   $('button#agregarConocimiento').click(function(){
+                       $.ajax({
+                           url:'/actualizaConocimientos',
+                           type:'POST',
+                           dataType: 'json',
+                           data:{
+                               'conocimiento': $('input#inputConocimiento').val()
+                           },
+                           beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                                var token = $('meta[name="csrf_token"]').attr('content');
+
+                                if (token) {
+                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                                }
+                            },
+                            success:function(response)
+                            {
+                               actualizaListaConocimientos();
+                            }
+                       });
+                   });
                 });
             </script>
-            <div class="panel panel-default">
-                <div class="panel-heading" style="text-align:center;">Cambiar Contraseña</div>
 
-                <div class="panel-body">
-                   <form class="form-horizontal" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Contraseña Actual</label>
-                            <div class="col-sm-10">
-                            <input type="password" class="form-control" name="constraActualUsuario" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Nueva Contraseña</label>
-                            <div class="col-sm-10">
-                            <input type="password" class="form-control" name="contraNuevaUsuario" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Repite Contraseña</label>
-                            <div class="col-sm-10">
-                            <input type="password" class="form-control" name="contraNuevaUsuarioOK" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarCambios" type="button" class="btn btn-warning form-control" >Guardar Cambios</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <button id="guardarCambios" type="button" class="btn btn-danger form-control" >Eliminar Cuenta</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

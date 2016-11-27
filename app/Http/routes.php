@@ -35,6 +35,9 @@ Route::get('/callback', 'SocialAuthController@callback');
 /*
     Rutas de USUARIO
 */
+Route::post('/getConocimientos',['middleware'=>'auth','uses'=>'HomeController@getConocimientos']);
+Route::post('/actualizaConocimientos',['middleware'=>'auth','uses'=>'HomeController@actualizaConocimientos']);
+
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::resource('eventos','HomeController@eventos');
   Route::resource('configuracion','HomeController@configuracion');
