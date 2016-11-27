@@ -55,19 +55,45 @@
                 <!-- *********************************************************                              <<<<  OJO
                             Si el usuario no ha iniciado sesion
                 ***********************************************************-->
-                    @if (Auth::user()->is_admin == 1) 
+                    @if (Auth::user()->roles == 'aa') 
                          <!-- *********************************************************                              <<<<  OJO
                                      Si el usuario es ADMIN
                          ***********************************************************-->
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/admin') }}">HomeAdmin</a></li>
+                            <li><a href="{{ url('/admin') }}">Inicio</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/admin/eventos') }}">Eventos</a></li>
                         </ul>
-                    @else                            
+						<ul class="nav navbar-nav">
+                            <li><a href="{{ url('/admin/proyectos') }}">Proyectos</a></li>
+                        </ul>
+						<ul class="nav navbar-nav">
+                            <li><a href="{{ url('/admin/usuarios') }}">Usuarios</a></li>
+                        </ul>
+                    @elseif  (Auth::user()->roles == 'ae')                       
+						<!-- *********************************************************                              <<<<  OJO
+                                     Si el usuario es ADMIN EVENTOS
+                         ***********************************************************-->
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/admin') }}">Inicio</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/admin/eventos') }}">Eventos</a></li>
+                        </ul>
+					@elseif  (Auth::user()->roles == 'ap')                       
+						<!-- *********************************************************                              <<<<  OJO
+                                     Si el usuario es ADMIN PROYECTOS
+                         ***********************************************************-->
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/admin') }}">Inicio</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/admin/proyectos') }}">Proyectos</a></li>
+                        </ul>
+					@else
                          <!-- *********************************************************                              <<<<  OJO
-                                     Si el usuario NO es ADMIN
+                                     Si el usuario no es ADMIN 
                          ***********************************************************-->
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/home') }}">Home</a></li>
@@ -84,9 +110,19 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                @if (Auth::user()->is_admin == 1)
-                                    [Admin]
-                                @endif
+                                @php
+									switch(Auth::user()->roles)
+									{
+										case 'aa': 	echo '[Administrador]';
+													break;
+										case 'ap':	echo '[A-Proyectos]';
+													break;
+										case 'ae':	echo '[A-Eventos]';
+													break;
+										case 'us':	echo '[Usuario]';
+													break;
+									}
+                                @endphp
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
