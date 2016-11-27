@@ -87,8 +87,17 @@ class ProyectosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+      $proyecto = Proyecto::find($id);
+      $nombre = $proyecto->nombre;
+      if ($request->ajax()) {
+        $proyecto->delete();
+        return response()->json([
+          'message' => 'proyecto '.$nombre.' eliminado exitosamente'
+        ]);
+      }
+      flash('proyecto '.$nombre.' eliminado exitosamente', 'success');
+      return redirect()->route('user.proyectos.index');
     }
 }
