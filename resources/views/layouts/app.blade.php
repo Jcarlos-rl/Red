@@ -69,7 +69,7 @@
                             <li><a href="{{ url('/admin/proyectos') }}">Proyectos</a></li>
                         </ul>
 						<ul class="nav navbar-nav">
-                            <li><a href="{{ url('/admin/usuarios') }}">Usuarios</a></li>
+                            <li><a href="{{ url('/admin/users') }}">Usuarios</a></li>
                         </ul>
                     @elseif  (Auth::user()->roles == 'ae')                       
 						<!-- *********************************************************                              <<<<  OJO
