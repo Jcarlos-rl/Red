@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Evento;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -27,8 +28,8 @@ class HomeController extends Controller
      
     public function eventos()
     {
-        $eventos = DB::table('eventos')->where('status',1)->select('*')->get();
-        return view('users/eventos',['eventos'=>$eventos]);
+         $eventos = Evento::orderBy('id','ASC')->where('status',1)->paginate(5);
+         return view('/user/verEventos')->with('eventos',$eventos);
     }
 
     public function configuracion()

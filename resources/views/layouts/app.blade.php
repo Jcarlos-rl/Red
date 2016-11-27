@@ -69,7 +69,7 @@
                             <li><a href="{{ url('/admin/proyectos') }}">Proyectos</a></li>
                         </ul>
 						<ul class="nav navbar-nav">
-                            <li><a href="{{ url('/admin/usuarios') }}">Usuarios</a></li>
+                            <li><a href="{{ url('/admin/users') }}">Usuarios</a></li>
                         </ul>
                     @elseif  (Auth::user()->roles == 'ae')                       
 						<!-- *********************************************************                              <<<<  OJO
@@ -95,11 +95,11 @@
                          <!-- *********************************************************                              <<<<  OJO
                                      Si el usuario no es ADMIN 
                          ***********************************************************-->
+                         
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/user/eventos') }}">Eventos</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav">
+                           <li><a href="{{ url('/user/eventos') }}">Eventos</a></li> 
                             <li><a href="{{ route('user.proyectos.index') }}">Proyectos</a></li>
+
                         </ul>
                     @endif
                @endif
@@ -133,6 +133,8 @@
                                 <li><a href="{{url('/user/configuracion')}}"<i class="fa fa-cog" aria-hidden="true"></i>  Configuración Cuenta</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out" aria-hidden="true"></i>Cerrar Sesión</a></li>
                             </ul>
+                           
+
                         </li>
                     @endif
                 </ul>
