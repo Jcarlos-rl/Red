@@ -80,9 +80,9 @@ class ProyectosController extends Controller
     public function update(Request $request, $id)
     {
         $Proyecto = Proyecto::find($id);
-        $Proyecto -> nombre=$request->titulo;
-        $Proyecto -> descripcion=$request->descripcion;
-        $Proyecto -> save();
+        $Proyecto->nombre=$request->titulo;
+        $Proyecto->descripcion=$request->descripcion;
+        $Proyecto->save();
         return redirect()-> route('user.proyectos.index');
     }
 
