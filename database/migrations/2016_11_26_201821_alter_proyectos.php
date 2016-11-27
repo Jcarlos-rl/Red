@@ -13,7 +13,7 @@ class AlterProyectos extends Migration
     public function up()
     {
       Schema::table('proyectos', function ($table) {
-         $table->enum('status',['ACCEPTED','REJECTED','WAITING'])->default('ACCEPTED');
+         $table->enum('status',['ACCEPTED','REJECTED','WAITING'])->default('WAITING');
       });
     }
 
