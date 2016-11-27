@@ -36,6 +36,7 @@ Route::get('/callback', 'SocialAuthController@callback');
     Rutas de USUARIO
 */
 
+
 Route::get('/home', 'HomeController@index');
 Route::get('/eventos','HomeController@eventos');
 
@@ -48,6 +49,9 @@ Route::get('/eventos','HomeController@eventos');
 */
 
 /*OJO... middleware => admin ... identifica derechos de admin, sino bloquea la ruta... solo usar en rutas de ADMIN */
+/**
+***       Admin
+**/
 
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
 Route::get('/admin/eventos', ['middleware' => 'admin', 'uses' => 'AdminController@eventos']);
@@ -57,6 +61,15 @@ Route::post('/admin/evento/{id}/cambiarStatus',['middleware' => 'admin', 'uses' 
 Route::post('/admin/evento/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosEvento']);
 Route::get('/admin/evento/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoEvento']);
 Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarEvento']);
+
+Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
+Route::get('/admin/proyectos', ['middleware' => 'admin', 'uses' => 'AdminController@proyectos']);
+Route::post('/admin/proyectos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearProyecto']);
+Route::get('/admin/proyecto/{id}/editar',['middleware' => 'admin', 'uses' => 'AdminController@editarProyecto']);
+Route::post('/admin/proyecto/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosProyecto']);
+Route::get('/admin/proyecto/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoProyecto']);
+Route::post('/admin/proyecto/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarProyecto']);
+
 
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
