@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Evento;
+use App\Proyecto;
 
 class EventoController extends Controller
 {
@@ -28,6 +29,11 @@ class EventoController extends Controller
          $evento = DB::table('eventos')->select('*')->where('id',$id)->first();
          //$evento = DB::table('eventos')->join('proyectos', 'proyectos.evento_id','=','eventos.id')->select('*')->where('eventos.id',$id)->first();
         return view('/user/verEvento',['evento'=>$evento]);
+     }
+
+     public function verProyectos(Request $request, $id){
+        $proyectos = Proyecto::orderBy('id','ASC')->where('evento_id',$id)->paginate(5);   
+        return view('/user/verProyectos')->with('proyectos',$proyectos);
      }
     public function index()
     {

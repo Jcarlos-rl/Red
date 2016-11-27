@@ -109,42 +109,7 @@
 
 
 
-<script>
-    /*$(document).ready(function(){
 
-        $('i.fa-plus-circle').click(function(){
-           $('#verEvento').modal('show');
-
-            $.ajax({
-                url : '/user/evento/'+$(this).attr('value')+'/getInformacion',
-                type : 'GET',
-                dataType : 'json',
-                beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
-                    var token = $('meta[name="csrf_token"]').attr('content');
-                    if (token) {
-                          return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                     }
-               },
-                success:function(response){
-                    $('div#informacionEvento').html(
-                        '<div class="col-sm-12">'+
-                            '<div class="row">'+
-                                '<div class="col-sm-8 col-sm-offset-2">'+
-                                    '<h2 style="text-align:center;">'+response.nombre+'</h2>'+
-                                '</div>'+
-                            '</div>'+
-                            '<div class="row">'+
-                                '<div class="col-sm-12">'+
-                                    '<p class="lead">'+response.descripcion+'</p>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'
-                    );
-                }
-            });
-        });
-
-    });*/
 </script>
 
 

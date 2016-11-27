@@ -3,25 +3,35 @@
 @section('content')
 
 <div class="container">
-    <h2>{{$evento->nombre}}</h2>
-    <div class="panel-group">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                Descripcion
-            </div>
-            <div class="panel-body">
-                <div class="col-sm-8">
-                    {{$evento->descripcion}}
-                </div>
-                <div class="col-sm-4">
-                    <img src="{{ asset( 'imagenesEventos/' . $evento->nombreImagen)}}" style ="height:300px; width=:200px" >
-                </div>
-            </div>
+    <div class="container">
+        <div class="container-fluid col-sm-10" >
+            <h2>{{$evento->nombre}}</h2>
         </div>
     </div>
     <div class="panel-group">
         <div class="panel panel-success">
             <div class="panel-heading">
+                Descripcion 
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-8">
+                    {{$evento->descripcion}}
+                     <br/> <button class="btn btn-success" value="{{$evento->id}}" onclick="redirect(1)">Ver Proyectos</button>
+                </div>
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}" onclick="redirect({{$evento->id}})"></i>
+                  
+
+                <div class="col-sm-3">
+                    <img src="{{ asset( 'imagenesEventos/' . $evento->nombreImagen)}}" style ="height:250px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <button onclick="hola()">Hola</button>
+    <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+            <i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}" onclick="redirect()"></i>
                 Lugar
             </div>
             <div class="panel-body">
@@ -70,5 +80,25 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    function redirect(){
+        alert("HOLA";)
+    }
+</script>
+
+
+<style>
+    i.fa-plus-circle:hover{
+        color:blue;
+    }
+    i.fa-pencil-square:hover{
+        color:green;
+    }
+    i.fa-trash:hover{
+        color:red;
+    }
+</style>
 
 @endsection
