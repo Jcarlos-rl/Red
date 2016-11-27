@@ -102,7 +102,8 @@
             </div>
         </div>
     </nav>
-
+    @include('flash::message')
     @yield('content')
+    @yield('javascripts')
 </body>
 </html>

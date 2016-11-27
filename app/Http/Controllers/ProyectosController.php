@@ -18,7 +18,7 @@ class ProyectosController extends Controller
     public function index()
     {
       $proyectos = Auth::user()->proyectos()->orderBy('id', 'ASC')->paginate(5);
-      return view('users/listProyectos')->with('proyectos', $proyectos);
+      return view('users/Proyecto/listProyectos')->with('proyectos', $proyectos);
     }
 
     /**
@@ -42,6 +42,7 @@ class ProyectosController extends Controller
         //dd($request-> all());
         $Proyecto = new Proyecto($request-> all());
         $Proyecto -> save();
+        $Proyecto->users()->attach(Auth::user(),['rol' => 'ROLE_LEADER']);
         return redirect()-> route('user.proyectos.index');
     }
 
@@ -54,7 +55,7 @@ class ProyectosController extends Controller
     public function show($id)
     {
       $proyecto = Proyecto::find($id);
-      return view('users/verProyecto')->with('proyecto', $proyecto);
+      return view('users/Proyecto/verProyecto')->with('proyecto', $proyecto);
     }
 
     /**
@@ -65,7 +66,8 @@ class ProyectosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $proyecto = Proyecto::find($id);
+        return view('users/Proyecto/ViewEditarP')->with('proyecto', $proyecto);
     }
 
     /**
@@ -77,7 +79,7 @@ class ProyectosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()-> route('user.proyectos.index');
     }
 
     /**
@@ -86,8 +88,17 @@ class ProyectosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+      $proyecto = Proyecto::find($id);
+      $nombre = $proyecto->nombre;
+      if ($request->ajax()) {
+        $proyecto->delete();
+        return response()->json([
+          'message' => 'proyecto '.$nombre.' eliminado exitosamente'
+        ]);
+      }
+      flash('proyecto '.$nombre.' eliminado exitosamente', 'success');
+      return redirect()->route('user.proyectos.index');
     }
 }
