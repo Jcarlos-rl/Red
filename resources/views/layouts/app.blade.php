@@ -96,7 +96,7 @@
                                      Si el usuario no es ADMIN 
                          ***********************************************************-->
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/home') }}">Home</a></li>
+                            <li><a href="{{ url('/user/eventos') }}">Eventos</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
                             <li><a href="{{ route('user.proyectos.index') }}">Proyectos</a></li>
@@ -130,7 +130,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{url('/user/configuracion')}}"<i class="fa fa-cog" aria-hidden="true"></i>  Configuración Cuenta</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out" aria-hidden="true"></i>Cerrar Sesión</a></li>
                             </ul>
                         </li>
                     @endif

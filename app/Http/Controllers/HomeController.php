@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,13 +24,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('home');
-    }
+     
     public function eventos()
     {
         $eventos = DB::table('eventos')->where('status',1)->select('*')->get();
         return view('users/eventos',['eventos'=>$eventos]);
+    }
+
+    public function configuracion()
+    {
+        return view('users/configuracionCuenta',['user' => Auth::user()]);
+    }
+
+    public function actualizaDatosUsuario(Request $request)
+    {
+        DB::table('users')->where('email',Auth::user()->email)->update(['name'=>$request->nombre]);
+        return json_encode("Datos Actualizados correctamente");
     }
 }

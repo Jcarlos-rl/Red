@@ -11,11 +11,11 @@
       <span id="text-message"></span>
     </div>
 </div>
-<h1>Proyectos</h1>
-<a href="{{route('user.proyectos.create')}}" class="btn btn-success">+</a>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+            <h1>Proyectos</h1>
+            <a href="{{route('user.proyectos.create')}}" class="btn btn-success" style="width:100%;">Crear Proyecto</a>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <table class="table table-striped">

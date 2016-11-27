@@ -35,12 +35,13 @@ Route::get('/callback', 'SocialAuthController@callback');
 /*
     Rutas de USUARIO
 */
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
+  Route::resource('eventos','HomeController@eventos');
+  Route::resource('configuracion','HomeController@configuracion');
+  Route::resource('proyectos','ProyectosController');
+});
 
-
-Route::get('/home', 'HomeController@index');
-Route::get('/eventos','HomeController@eventos');
-
-
+Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
 
 
 
@@ -69,9 +70,3 @@ Route::get('/admin/proyecto/{id}/editar',['middleware' => 'admin', 'uses' => 'Ad
 Route::post('/admin/proyecto/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosProyecto']);
 Route::get('/admin/proyecto/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoProyecto']);
 Route::post('/admin/proyecto/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarProyecto']);
-
-
-
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
-  Route::resource('proyectos','ProyectosController');
-});
