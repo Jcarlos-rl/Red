@@ -52,7 +52,7 @@ Route::post('/admin/proyecto/{id}/eliminar',['middleware' => 'admin', 'uses' => 
 
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
 Route::get('/admin/users', ['middleware' => 'admin', 'uses' => 'AdminController@users']);
-Route::post('/admin/proyectos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearProyecto']);
+//Route::post('/admin/proyectos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearProyecto']);
 Route::get('/admin/user/{id}/editar',['middleware' => 'admin', 'uses' => 'AdminController@editarUsers']);
 Route::post('/admin/user/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosUsers']);
 Route::get('/admin/user/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoUsers']);
