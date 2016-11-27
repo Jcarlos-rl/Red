@@ -9,7 +9,7 @@ class Proyecto extends Model
     public $timestamps = false;
 
      protected $fillable = [
-        'nombre', 'descripcion',
+        'nombre', 'descripcion', 'status',
     ];
 
     public function users()
