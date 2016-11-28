@@ -79,7 +79,8 @@ Route::get('user/evento/proyecto/{id}, EventoController@verProyecto');
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::resource('proyectos','ProyectosController');
-  Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUser']);
+  Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUsers']);
+  Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
   Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 });
 

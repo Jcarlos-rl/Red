@@ -1,16 +1,23 @@
 $(document).ready(function(){
   $('#btnSend').click(function () {
-    var correos = new Array();
-    $('#collaborators div').each(function (index) {
+    var idsUser = new Array();
+    $('#selectedCollaborators tr').each(function (index) {
       var id = $(this).attr('id');
-      correos.push(id);
+      idsUser.push(id);
     });
-    var data = {emails : correos, _token : token}
-    var url = '../proyecto/enviarCorreos';
-    $.post(url, data, function(result){
-      alert(result);
-    }).fail(function(){
-      alert('ERROR');
-    });
+    if (idsUser.length !== 0) {
+      var data = {idProyecto : idProject, idsUsuarios : idsUser, _token : token}
+      var url = '../proyecto/enviarCorreos';
+      $.post(url, data, function(result){
+        bootbox.alert(result, function () {
+          location.reload();
+        });        
+      }).fail(function(){
+        alert('ERROR');
+      });
+    }
+    else {
+      bootbox.alert("No hay colaboradores en la lista.");
+    }
   });
 });

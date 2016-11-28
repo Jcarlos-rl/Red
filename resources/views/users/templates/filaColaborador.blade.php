@@ -2,7 +2,7 @@
   <th>\
     <div class="" id="%email%">\
       <span>%name%</span>\
-      <button type="button" name="button">x</button>\
+      <button class="btn btn-%style% btn-sm" type="button" name="button">%title%</button>\
     </div>\
   </th>\
 </tr>\
