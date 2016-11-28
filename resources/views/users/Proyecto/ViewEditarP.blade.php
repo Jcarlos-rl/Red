@@ -22,6 +22,12 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+    </div>
+    <div class="form-group">
+      {!! Form::submit('Actualizar', ['class' => 'btn btn-success']) !!}
+>>>>>>> d8b0cb287b061487c20b3a9b3376c21ea2f4d850
     </div>
 </div>
 

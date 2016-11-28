@@ -18,9 +18,13 @@
                     {!! Form::label('Descripcion', 'Descipcion') !!}
                     {!! Form::text('descripcion', null, ['class' => 'form-control', 'placeholder' => 'Descripcion...']) !!}
                   </div>
+<<<<<<< HEAD
                   <div class="form-group">
                   <br>
                     {!! Form::submit('Agregar', ['class' => 'btn btn-success', 'style' => 'width:100%']) !!}
+=======
+                    {!! Form::submit('Agregar', ['class' => 'btn btn-success']) !!}
+>>>>>>> d8b0cb287b061487c20b3a9b3376c21ea2f4d850
                   </div>
                   {!! Form::close() !!}
                 </div>

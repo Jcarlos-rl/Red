@@ -51,7 +51,15 @@
                   </div>
                 </div>
             </div>
+
         </div>
+        <label class="col-md-4 control-label">Subir Nuevo Archivo</label>
+                     <div class="col-md-9">
+                       <input type="file" class="form-control" name="file" >
+
+                     {!! Form::submit('+', ['class' => 'btn btn-success']) !!}
+                   </div>
+        <div class="form-group">
         @endif
     </div>
     <div class="row">
