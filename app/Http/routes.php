@@ -34,6 +34,8 @@ Route::get('/callback', 'SocialAuthController@callback');
 
 Route::post('/getConocimientos',['middleware'=>'auth','uses'=>'HomeController@getConocimientos']);
 Route::post('/actualizaConocimientos',['middleware'=>'auth','uses'=>'HomeController@actualizaConocimientos']);
+Route::post('/getMisConocimientos',['middleware'=>'auth','uses'=>'HomeController@getMisConocimientos']);
+Route::post('/eliminaConocimiento',['middleware'=>'auth','uses'=>'HomeController@eliminaConocimiento']);
 Route::get('/user/configuracion',['middleware'=>'auth','uses'=>'HomeController@configuracion']);
 Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
 

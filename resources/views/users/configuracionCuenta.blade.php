@@ -82,7 +82,18 @@
                                             </div><!-- /btn-group -->
                                         </div><!-- /input-group -->
                                     </div> 
-                                    <div class="col-md-10 col-md-offset-1" id="listaConocimientosUsuario">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <table class="table table-hover">
+                                            <thread>
+                                                <tr>
+                                                    <th>Conocimiento</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thread>
+                                            <tbody id="listaConocimientosUsuario">
+                                                
+                                            </tbody>
+                                        </table>
                                     </div>                                  
                                 </div>
                             </form>
@@ -116,8 +127,56 @@
                             }             
                         });
                    }
+                   var actualizaMisConocimientos = function(){
+                       $.ajax({
+                           url:'/getMisConocimientos',
+                           type:'POST',
+                           dataType:'json',
+                           beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                                var token = $('meta[name="csrf_token"]').attr('content');
+                                if (token) {
+                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                                }
+                            },
+                            success:function(response)
+                            {
+                                //alert(JSON.stringify(response));
+                                for(var i=0; i<response.length; i++)
+                                {
+                                    $('tbody#listaConocimientosUsuario').append(
+                                        '<tr>'+
+                                            '<th>'+response[i].nombre+'</th>'+
+                                            '<th><button class="btn-danger" id="eliminarMiConocimiento" value="'+response[i].conocimiento_id+'">X</button></th>'+
+                                        '</tr?'
+                                     );
+                                }
+                            }             
+                       });
+                   };
+                $('tbody#listaConocimientosUsuario').delegate('#eliminarMiConocimiento','click',function(){
+                    //alert($(this).attr('value'));
+                    $.ajax({
+                        url:'/eliminaConocimiento',
+                        type: 'POST',
+                        dataType: 'json',
+                        data:{
+                            'idConocimiento':$(this).attr('value')
+                        },
+                        beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                             var token = $('meta[name="csrf_token"]').attr('content');
+                              if (token) {
+                                 return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                              }
+                        },
+                        success:function(response)
+                        {
+                            alert(response);
+                        }
+                    });
+                });
                 $(document).ready(function(){
                    actualizaListaConocimientos();
+                   actualizaMisConocimientos();
                    $(window).keydown(function(event){
                         if(event.keyCode == 13) {
                         event.preventDefault();

@@ -49,6 +49,16 @@ class HomeController extends Controller
         return json_encode($conocimientos);
     }
 
+    public function getMisConocimientos()
+    {
+        //Necesito el id del usuario para otorgarle el conocimiento 
+        $idUser = DB::table('users')->where('email',Auth::user()->email)->select('id')->first();
+        
+        $misConocimientos = DB::table('conocimientos')->join('users_conocimientos','conocimientos.id','=','users_conocimientos.conocimiento_id')
+                                                      ->join('users','users.id','=','users_conocimientos.user_id')
+                                                      ->where('users_conocimientos.user_id',$idUser->id)->select('conocimientos.nombre','users_conocimientos.conocimiento_id')->get();
+        return json_encode($misConocimientos);
+    }
     public function actualizaConocimientos(Request $request)
     {
         //Existe actualmente este conocimiento?
@@ -81,5 +91,14 @@ class HomeController extends Controller
         //Actualizo los conocimientos al usuario 
         $conocimientos = DB::table('conocimientos')->select('*')->get();
         return json_encode($conocimientos);
+    }
+    public function eliminaConocimiento(Request $request)
+    {
+        //Necesito el id del usuario para otorgarle el conocimiento 
+        $idUser = DB::table('users')->where('email',Auth::user()->email)->select('id')->first();
+        
+        DB::table('users_conocimientos')->where('conocimiento_id',$request->idConocimiento)
+                                        ->where('user_id',$idUser->id)->delete();
+        return "OK";
     }
 }
