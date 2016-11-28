@@ -23,7 +23,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
     public function conocimientos()
     {
         return $this->belongsToMany('App\Conocimiento','users_conocimientos','user_id','conocimiento_id');
