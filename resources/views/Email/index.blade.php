@@ -3,9 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Plantilla</title>
-    <link rel="stylesheet" href="Estilo.css" >
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="header.js"></script>
   </head>
   <body>
     <header >

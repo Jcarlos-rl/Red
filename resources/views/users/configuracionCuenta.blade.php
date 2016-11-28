@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<meta name="csrf_token" content="{{ csrf_token() }}" /> <!--Se necestia este metadato para poder hacer AJAX, se envia el csrf_token al server para validar que si existe la sesion -->
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -82,7 +81,18 @@
                                             </div><!-- /btn-group -->
                                         </div><!-- /input-group -->
                                     </div> 
-                                    <div class="col-md-10 col-md-offset-1" id="listaConocimientosUsuario">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <table class="table table-hover">
+                                            <thread>
+                                                <tr>
+                                                    <th>Conocimiento</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thread>
+                                            <tbody id="listaConocimientosUsuario">
+                                                
+                                            </tbody>
+                                        </table>
                                     </div>                                  
                                 </div>
                             </form>
@@ -116,8 +126,57 @@
                             }             
                         });
                    }
+                   var actualizaMisConocimientos = function(){
+                       $('tbody#listaConocimientosUsuario').empty();
+                       $.ajax({
+                           url:'/getMisConocimientos',
+                           type:'POST',
+                           dataType:'json',
+                           beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                                var token = $('meta[name="csrf_token"]').attr('content');
+                                if (token) {
+                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                                }
+                            },
+                            success:function(response)
+                            {
+                                //alert(JSON.stringify(response));
+                                for(var i=0; i<response.length; i++)
+                                {
+                                    $('tbody#listaConocimientosUsuario').append(
+                                        '<tr>'+
+                                            '<th>'+response[i].nombre+'</th>'+
+                                            '<th><button class="btn-danger" id="eliminarMiConocimiento" value="'+response[i].conocimiento_id+'">X</button></th>'+
+                                        '</tr?'
+                                     );
+                                }
+                            }             
+                       });
+                   };
+                $('tbody#listaConocimientosUsuario').delegate('#eliminarMiConocimiento','click',function(){
+                    //alert($(this).attr('value'));
+                    $.ajax({
+                        url:'/eliminaConocimiento',
+                        type: 'POST',
+                        dataType: 'json',
+                        data:{
+                            'idConocimiento':$(this).attr('value')
+                        },
+                        beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                             var token = $('meta[name="csrf_token"]').attr('content');
+                              if (token) {
+                                 return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                              }
+                        },
+                        success:function(response)
+                        {
+                            alert(response);
+                        }
+                    });
+                });
                 $(document).ready(function(){
                    actualizaListaConocimientos();
+                   actualizaMisConocimientos();
                    $(window).keydown(function(event){
                         if(event.keyCode == 13) {
                         event.preventDefault();
@@ -162,7 +221,15 @@
                             },
                             success:function(response)
                             {
-                               actualizaListaConocimientos();
+                                $('datalist#conocimientos').empty();
+                                actualizaMisConocimientos();
+                               //alert(JSON.stringify(response));
+                                for(var i=0; i<response.length; i++)
+                                {
+                                    $('datalist#conocimientos').append(
+                                        '<option value="'+response[i].nombre+'"></option>'
+                                    );
+                                }
                             }
                        });
                    });
