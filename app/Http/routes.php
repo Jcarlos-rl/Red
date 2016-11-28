@@ -43,6 +43,8 @@ Route::post('/user/nuevoMensaje',['middleware'=>'auth','uses'=>'HomeController@n
 Route::post('/user/bandejaEntrada/',['middleware'=>'auth','uses'=>'HomeController@bandejaEntrada']);
 Route::post('/user/bandejaLeidos/',['middleware'=>'auth','uses'=>'HomeController@bandejaLeidos']);
 Route::post('/user/verMensaje',['middleware'=>'auth','uses'=>'HomeController@verMensaje']);
+Route::post('/user/cambiarColor',['middleware'=>'auth','uses'=>'HomeController@cambiarColor']);
+
 
 Route::get('/user/eventos',['middleware'=>'auth','uses'=>'EventoController@eventos']);
 Route::get('/user/evento/{id}',['middleware'=>'auth','uses'=>'EventoController@verEvento']);
