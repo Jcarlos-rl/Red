@@ -30,22 +30,42 @@ Route::auth();
 Route::get('/redirect', 'SocialAuthController@redirect');
 Route::get('/callback', 'SocialAuthController@callback');
 
+/*User*/
+
+Route::post('/getConocimientos',['middleware'=>'auth','uses'=>'HomeController@getConocimientos']);
+Route::post('/actualizaConocimientos',['middleware'=>'auth','uses'=>'HomeController@actualizaConocimientos']);
+Route::get('/user/configuracion',['middleware'=>'auth','uses'=>'HomeController@configuracion']);
+Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
+
+Route::get('/user/eventos', 'EventoController@eventos');
+Route::get('/user/evento/{id}', 'EventoController@verEvento');
+Route::get('/user/proyecto/ver/{id}','EventoController@verProyecto');
+Route::get('/user/evento/{id}/getInformacion', 'AdminController@getInfoEvento');
+Route::get('user/evento/{id}/proyecto', 'EventoController@verProyectos');
+Route::get('user/evento/proyecto/{id}, EventoController@verProyecto');
+
+
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
+  Route::resource('proyectos','ProyectosController');
+});
+
+Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUser']);
+Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 
 
 /*
     Rutas de USUARIO
-*/
-Route::post('/getConocimientos',['middleware'=>'auth','uses'=>'HomeController@getConocimientos']);
-Route::post('/actualizaConocimientos',['middleware'=>'auth','uses'=>'HomeController@actualizaConocimientos']);
+
+
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::resource('eventos','HomeController@eventos');
-  Route::resource('configuracion','HomeController@configuracion');
+  
   Route::resource('proyectos','ProyectosController');
 });
 
-Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
 
+*/
 
 
 /*
@@ -67,21 +87,14 @@ Route::get('/admin/evento/{id}/getInformacion',['middleware' => 'admin', 'uses' 
 Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarEvento']);
 
 
-/*User*/
 
+/**
+***       Admin Proyectos
+**/
 
-Route::get('/user/eventos', 'EventoController@eventos');
-Route::get('/user/evento/{id}', 'EventoController@verEvento');
-Route::get('/user/proyecto/ver/{id}','EventoController@verProyecto');
-Route::get('/user/evento/{id}/getInformacion', 'AdminController@getInfoEvento');
-Route::get('user/evento/{id}/proyecto', 'EventoController@verProyectos');
-Route::get('user/evento/proyecto/{id}, EventoController@verProyecto');
-
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
-  Route::resource('proyectos','ProyectosController');
-  Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUser']);
-  Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
-});
+Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
+Route::get('/admin/proyectos', ['middleware' => 'admin', 'uses' => 'AdminController@proyectos']);
+Route::get('/admin/proyecto/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoProyecto']);
 
 
 /**
@@ -90,8 +103,9 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
 
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
 Route::get('/admin/users', ['middleware' => 'admin', 'uses' => 'AdminController@users']);
-//Route::post('/admin/users/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearProyecto']);
+//Route::post('/admin/proyectos/crear',['middleware' => 'admin', 'uses' => 'AdminController@crearProyecto']);
 Route::get('/admin/user/{id}/editar',['middleware' => 'admin', 'uses' => 'AdminController@editarUsers']);
 Route::post('/admin/user/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosUsers']);
 Route::get('/admin/user/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoUsers']);
 Route::post('/admin/user/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarUsers']);
+

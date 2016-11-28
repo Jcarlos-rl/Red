@@ -35,31 +35,5 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function(){
-       $('button#guardarCambios').click(function(){
-            $.ajax({
-                url : '/admin/proyecto/{{$proyecto->id}}/guardarCambios',
-                type: 'POST',
-                dataType : 'text',
-                data:{
-                    'nombre' : $('input#nombreProyecto').val(),
-                    'descripcion'    : $('textarea#descripcionProyecto').val()
-                },
-                beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
-                    var token = $('meta[name="csrf_token"]').attr('content');
-
-                    if (token) {
-                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                    }
-                },
-                success:function(response){
-                    alert(response);
-                     window.location.href = '/admin/proyectos';
-                }
-            });
-        });
-    });
-</script>
 
 @endsection
