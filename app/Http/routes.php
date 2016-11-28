@@ -38,6 +38,11 @@ Route::post('/getMisConocimientos',['middleware'=>'auth','uses'=>'HomeController
 Route::post('/eliminaConocimiento',['middleware'=>'auth','uses'=>'HomeController@eliminaConocimiento']);
 Route::get('/user/configuracion',['middleware'=>'auth','uses'=>'HomeController@configuracion']);
 Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
+Route::post('/user/getListaDestinatarios',['middleware'=>'auth','uses'=>'HomeController@getListaDestinatarios']);
+Route::post('/user/nuevoMensaje',['middleware'=>'auth','uses'=>'HomeController@nuevoMensaje']);
+Route::post('/user/bandejaEntrada/',['middleware'=>'auth','uses'=>'HomeController@bandejaEntrada']);
+Route::post('/user/bandejaLeidos/',['middleware'=>'auth','uses'=>'HomeController@bandejaLeidos']);
+Route::post('/user/verMensaje',['middleware'=>'auth','uses'=>'HomeController@verMensaje']);
 
 Route::get('/user/eventos',['middleware'=>'auth','uses'=>'EventoController@eventos']);
 Route::get('/user/evento/{id}',['middleware'=>'auth','uses'=>'EventoController@verEvento']);
