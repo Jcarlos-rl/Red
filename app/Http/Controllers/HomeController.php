@@ -103,4 +103,63 @@ class HomeController extends Controller
                                         ->where('user_id',$idUser->id)->delete();
         return "OK";
     }
+
+    public function getListaDestinatarios()
+    {
+       $usuarios =  DB::table('users')->select('*')->get();
+       
+       return json_encode($usuarios);
+    }
+
+    public function nuevoMensaje(Request $request)
+    {
+         $remite_id = DB::table('users')->where('email',Auth::user()->email)->select('id')->first();
+         $recibe_id = DB::table('users')->where('name',$request->destinatario)->select('id')->first();
+
+         DB::table('mensajes')->insert([
+             'remite_id' => $remite_id->id,
+             'recibe_id' => $recibe_id->id,
+                'cuerpo' => $request->cuerpo,
+           'fecha_envio' => date('Y-m-d H:i:s')
+         ]);
+
+        return json_encode("Mensaje enviado");
+    }
+    public function bandejaEntrada()
+    {
+        //Id de sesion actual... quiero los mensajes recibidos de esta sesion.
+        $userId = DB::table('users')->where('email',Auth::user()->email)->select('id')->first();
+        //Obtengo los mensajes que recibio el dueño de la sesion, pero aun necesito a informacion de los remitentes.
+        $bandeja_entrada = DB::table('mensajes')->join('users','mensajes.remite_id','=','users.id')
+                                                ->where('mensajes.recibe_id',$userId->id)
+                                                ->where('mensajes.status','no_leido')
+                                                ->select('mensajes.id','mensajes.fecha_envio','mensajes.status','users.name')->get();
+       
+       return json_encode($bandeja_entrada);
+    }
+
+    public function bandejaLeidos()
+    {
+        //Id de sesion actual... quiero los mensajes recibidos de esta sesion.
+        $userId = DB::table('users')->where('email',Auth::user()->email)->select('id')->first();
+        //Obtengo los mensajes que recibio el dueño de la sesion, pero aun necesito a informacion de los remitentes.
+        $bandeja_entrada = DB::table('mensajes')->join('users','mensajes.remite_id','=','users.id')
+                                                ->where('mensajes.recibe_id',$userId->id)
+                                                ->where('mensajes.status','leido')
+                                                ->select('mensajes.id','mensajes.fecha_envio','mensajes.status','users.name')->get();
+       
+       return json_encode($bandeja_entrada);
+    }
+
+    public function verMensaje(Request $request)
+    {
+        $mensaje = DB::table('mensajes')->join('users','mensajes.remite_id','=','users.id')
+                                        ->where('mensajes.id',$request->id_mensaje)->select('mensajes.fecha_envio','mensajes.cuerpo','users.name')->first();
+        
+        //Cambiamos el estatus a leido
+        DB::table('mensajes')->where('id',$request->id_mensaje)->update([
+            'status'=>'leido'
+        ]);
+        return json_encode($mensaje);
+    }
 }
