@@ -22,7 +22,7 @@ class Admin
         } 
 		else if (Auth::guard($guard)->user()->roles!='aa' && Auth::guard($guard)->user()->roles!='ae' && Auth::guard($guard)->user()->roles!='ap') 
 		{
-			return redirect()->to('/')->withError('Permission Denied');
+			return redirect()->to('/user/eventos')->withError('Permission Denied');
         }
 
         return $next($request);

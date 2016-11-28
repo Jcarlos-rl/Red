@@ -37,35 +37,21 @@ Route::post('/actualizaConocimientos',['middleware'=>'auth','uses'=>'HomeControl
 Route::get('/user/configuracion',['middleware'=>'auth','uses'=>'HomeController@configuracion']);
 Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
 
-Route::get('/user/eventos', 'EventoController@eventos');
-Route::get('/user/evento/{id}', 'EventoController@verEvento');
-Route::get('/user/proyecto/ver/{id}','EventoController@verProyecto');
-Route::get('/user/evento/{id}/getInformacion', 'AdminController@getInfoEvento');
-Route::get('user/evento/{id}/proyecto', 'EventoController@verProyectos');
-Route::get('user/evento/proyecto/{id}, EventoController@verProyecto');
+Route::get('/user/eventos',['middleware'=>'auth','uses'=>'EventoController@eventos']);
+Route::get('/user/evento/{id}',['middleware'=>'auth','uses'=>'EventoController@verEvento']);
+Route::get('/user/proyecto/ver/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
+Route::get('/user/evento/{id}/getInformacion',['middleware'=>'auth','uses'=>'AdminController@getInfoEvento']);
+Route::get('/user/evento/{id}/proyecto',['middleware'=>'auth','uses'=>'EventoController@verProyectos']);
+Route::get('/user/evento/proyecto/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
 
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::resource('proyectos','ProyectosController');
 });
 
-Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUser']);
-Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
+Route::post('/proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUser']);
+Route::post('/proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 
-
-/*
-    Rutas de USUARIO
-
-
-
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
-  Route::resource('eventos','HomeController@eventos');
-  
-  Route::resource('proyectos','ProyectosController');
-});
-
-
-*/
 
 
 /*
