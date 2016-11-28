@@ -103,4 +103,10 @@ class HomeController extends Controller
                                         ->where('user_id',$idUser->id)->delete();
         return "OK";
     }
+
+    public function buscarNombre(Request $request){
+        $users = DB::table('users')->where('nombre',$request->nombre);
+        return json_encode($users);
+    }
+
 }

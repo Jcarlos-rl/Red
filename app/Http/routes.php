@@ -38,6 +38,8 @@ Route::post('/getMisConocimientos',['middleware'=>'auth','uses'=>'HomeController
 Route::post('/eliminaConocimiento',['middleware'=>'auth','uses'=>'HomeController@eliminaConocimiento']);
 Route::get('/user/configuracion',['middleware'=>'auth','uses'=>'HomeController@configuracion']);
 Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
+Route::post('/user/buscarNombre',['middleware' => 'auth', 'uses' =>'HomeController@buscarNombre']);
+Route::post('/user/buscarConocimiento',['middleware' => 'auth', 'uses' =>'HomeController@buscarConocimiento']);
 
 Route::get('/user/eventos',['middleware'=>'auth','uses'=>'EventoController@eventos']);
 Route::get('/user/evento/{id}',['middleware'=>'auth','uses'=>'EventoController@verEvento']);

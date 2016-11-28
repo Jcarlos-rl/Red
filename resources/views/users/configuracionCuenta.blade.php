@@ -148,7 +148,7 @@
                                         '<tr>'+
                                             '<th>'+response[i].nombre+'</th>'+
                                             '<th><button class="btn-danger" id="eliminarMiConocimiento" value="'+response[i].conocimiento_id+'">X</button></th>'+
-                                        '</tr?'
+                                        '</tr>'
                                      );
                                 }
                             }             
