@@ -25,7 +25,7 @@
                         -->
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarDatosPersonales" type="button" class="btn btn-primary form-control" >Guardar Cambios</button>
+                                <button id="guardarDatosPersonales" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
                             </div>
                         </div>
                     </form>
@@ -33,62 +33,65 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-align:center;">Cambiar Contraseña</div>
-
-                <div class="panel-body">
-                   <form class="form-horizontal" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Actual</label>
-                            <div class="col-sm-10">
-                            <input type="password" class="form-control" name="constraActualUsuario" value="">
+                    <div class="panel-body">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Actual</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="constraActualUsuario" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Nueva</label>
-                            <div class="col-sm-10">
-                            <input type="password" class="form-control" name="contraNuevaUsuario" value="">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nueva</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="contraNuevaUsuario" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Repite</label>
-                            <div class="col-sm-10">
-                            <input type="password" class="form-control" name="contraNuevaUsuarioOK" value="">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Repite</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="contraNuevaUsuarioOK" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarCambios" type="button" class="btn btn-warning form-control" >Guardar Cambios</button>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <button id="guardarCambios" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <button id="guardarCambios" type="button" class="btn btn-danger form-control" >Eliminar Cuenta</button>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="text-align:center;">Conocimientos
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" list="conocimientos" id="inputConocimiento">
+                                        <datalist id="conocimientos"> 
+                                        </datalist>
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-success" id="agregarConocimiento">Agregar</button>
+                                        </div><!-- /btn-group -->
+                                    </div><!-- /input-group -->
+                                </div> 
+                                <div class="col-md-10 col-md-offset-1" id="listaConocimientosUsuario">
+                                </div>                               
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <button id="guardarCambios" type="button" class="btn btn-danger form-control" >Eliminar Cuenta</button>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-                <div class="panel panel-default">
-                        <div class="panel-heading" style="text-align:center;">Conocimientos</div>
-                        <div class="panel-body">
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="col-md-10 col-md-offset-1">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" list="conocimientos" id="inputConocimiento">
-                                                <datalist id="conocimientos"> 
-                                                </datalist>
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-success" id="agregarConocimiento">Agregar</button>
-                                            </div><!-- /btn-group -->
-                                        </div><!-- /input-group -->
-                                    </div> 
-                                    <div class="col-md-10 col-md-offset-1" id="listaConocimientosUsuario">
-                                    </div>                                  
-                                </div>
-                            </form>
-                        </div>
-                </div>
-         </div>
     </div>
 </div>
 
