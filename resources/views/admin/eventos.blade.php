@@ -18,16 +18,25 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th class="text-center">Status</th>
                             </tr>
                         </thread>
                         <tbody>
                             @foreach($eventos as $evento)
-                                <tr>
+                                <tr class="rowsTabla">
                                     <th scope="row">{{$evento->id}}</th>
                                     <th>{{$evento->nombre}}</th>
-                                    <th><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
-                                    <th><i class="fa fa-pencil-square fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
-                                    <th><i class="fa fa-trash fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
+                                    <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
+                                    <th class="text-right"><i class="fa fa-pencil-square fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
+                                    <th class="text-right"><i class="fa fa-trash fa-2x" aria-hidden="true" value="{{$evento->id}}"></i></th>
+                                    <th class="text-center">
+                                        <!-- Single button -->
+                                        <div class="btn-group">
+                                        <button type="button" class="btn statusBtn" style="width:200%;" id="{{$evento->id}}" value="{{$evento->status}}">
+                                           <i class="fa fa-bullseye" aria-hidden="true"></i>
+                                        </button>
+                                        </div>
+                                    </th>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -77,7 +86,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" id="informacionEvento">
-           
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" style="width:100%;" data-dismiss="modal">Cerrar</button>
@@ -109,7 +118,7 @@
     $(document).ready(function(){
 
         $('i.fa-plus-circle').click(function(){
-           $('#verEvento').modal('show'); 
+           $('#verEvento').modal('show');
 
             $.ajax({
                 url : '/admin/evento/'+$(this).attr('value')+'/getInformacion',
@@ -149,9 +158,46 @@
            $('form#eliminarEvento').attr('action','/admin/evento/'+$(this).attr('value')+'/eliminar');
          });
 
+         $('.rowsTabla > th > div > button').each(function(){
+             if($(this).attr('value') == 0){
+                 $(this).addClass("btn-danger");
+             }
+             else{
+                 $(this).addClass("btn-success");
+             }
+         });
+         $('.rowsTabla > th > div > button').click(function(){
+             //alert($(this).attr('id'));
+             if($(this).attr('value') == 0)
+             {
+                 $(this).removeClass('btn-danger');
+                 $(this).addClass('btn-success');
+                 $(this).attr('value',1);
+             }
+             else{
+                 $(this).removeClass('btn-success');
+                 $(this).addClass('btn-danger');
+                 $(this).attr('value',0);
+             }
+             $.ajax({
+                 url:'/admin/evento/'+$(this).attr('id')+'/cambiarStatus',
+                 type:'POST',
+                 dataType:'json',
+                 data:{
+                     'status': $(this).attr('value')
+                 },beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                    var token = $('meta[name="csrf_token"]').attr('content');
 
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                 success:function(response){
+                     //alert(response);
+                 }
+             });
+         });
     });
-
 </script>
 
 @endsection

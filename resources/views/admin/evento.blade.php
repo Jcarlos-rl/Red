@@ -71,7 +71,37 @@
         </div>
     </div>
 </div>
+<script>
+/*
+    $(document).ready(function(){
+       $('button#guardarCambios').click(function(){
+            $.ajax({
+                url : '/admin/evento/{{$evento->id}}/guardarCambios',
+                type: 'POST',
+                dataType : 'text',
+                data:{
+                    'nombre' : $('input#nombreEvento').val(),
+                    'lugar'  : $('input#lugarEvento').val(),
+                    'inicioRegistro' : $('input#inicioRegistroEvento').val(),
+                    'fin_registro'   : $('input#finRegistroEvento').val(),
+                    'inicio_evento'  : $('input#inicioEvento').val(),
+                    'fin_evento'     : $('input#finEvento').val(),
+                    'descripcion'    : $('textarea#descripcionEvento').val()
+                },
+                beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                    var token = $('meta[name="csrf_token"]').attr('content');
 
-
-
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                success:function(response){
+                    alert(response);
+                     window.location.href = '/admin/eventos';
+                }
+            });
+        });
+    });
+    */
+</script>
 @endsection
