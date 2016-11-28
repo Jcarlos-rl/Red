@@ -15,22 +15,22 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h1>Proyectos</h1>
-            <a href="{{route('user.proyectos.create')}}" class="btn btn-success" style="width:100%;">Crear Proyecto</a>
+            <a href="{{route('user.proyectos.create')}}" class="btn btn-success" style="width:100%;"><h4>Crear Proyecto</h4></a>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel panel-default">
                         <table class="table table-striped">
                             <thread>
                                 <tr>
-                                    <th class="text-center">Nombre</th>
-                                    <th class="text-center">Rol</th>
-                                    <th class="text-center">Acciones</th>
+                                    <th class="text-center"><h4>Nombre</h4></th>
+                                    <th class="text-center"><h4>Rol</h4></th>
+                                    <th class="text-center"><h4>Acciones</h4></th>
                                 </tr>
                             </thread>
                             <tbody>
                                 @foreach($proyectos as $proyecto)
                                     <tr class="rowsTabla" id="{{$proyecto->id}}">
-                                        <th scope="row" id="projectName">{{$proyecto->nombre}}</th>
+                                        <th scope="row" id="projectName"><h4>{{$proyecto->nombre}}</h4></th>
                                         <th class="text-center">
                                           @if($proyecto->pivot->rol == 'ROLE_LEADER')
                                             <span class="label label-success">Lider</span>
