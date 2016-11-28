@@ -83,6 +83,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
   Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 });
+Route::get('email', 'ProyectosController@prueba');
 
 
 /**

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use Session;
+use redirect;
 
 use App\Http\Requests;
 use App\Proyecto;
@@ -153,9 +156,18 @@ class ProyectosController extends Controller
         $project = Proyecto::find($request->idProyecto);
         foreach ($request->idsUsuarios as $idUser) {
           $user = User::find($idUser);
+
           $user->proyectos()->attach($project,['status' => 'WAITING']);
         }
         return 'Invitacion enviada';
       }
+    }
+
+    public function prueba()
+    {
+      Mail::send('Email.index',[],function ($mensaje)
+      {
+        $mensaje->to('appjak34@gmail.com');
+      });
     }
 }
