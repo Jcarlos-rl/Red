@@ -78,7 +78,9 @@ class HomeController extends Controller
         //El usuario actualmente ya cuenta con este conocimiento?
         $yaTieneConocimiento = DB::table('users')->join('users_conocimientos','users.id','=','users_conocimientos.user_id')
                                                  ->join('conocimientos','conocimientos.id','=','users_conocimientos.conocimiento_id')
-                                                 ->where('users_conocimientos.user_id','users.id')->select('users.id')->get();
+                                                 ->where('users_conocimientos.user_id',$idUser->id)
+                                                 ->where('users_conocimientos.conocimiento_id',$idConocimiento->id)
+                                                 ->select('users.id')->get();
         if(!sizeOf($yaTieneConocimiento)) //Si no tiene este conocimiento entonces
         {
             //Guardo el conocimiento al usuario en tabla users_conocimientos

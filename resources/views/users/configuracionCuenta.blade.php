@@ -128,6 +128,7 @@
                         });
                    }
                    var actualizaMisConocimientos = function(){
+                       $('tbody#listaConocimientosUsuario').empty();
                        $.ajax({
                            url:'/getMisConocimientos',
                            type:'POST',
@@ -222,6 +223,7 @@
                             success:function(response)
                             {
                                 $('datalist#conocimientos').empty();
+                                actualizaMisConocimientos();
                                //alert(JSON.stringify(response));
                                 for(var i=0; i<response.length; i++)
                                 {
