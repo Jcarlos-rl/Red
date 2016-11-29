@@ -99,9 +99,29 @@
                         </div>
                 </div>
          </div>
+         <div class="col-md-6">
+         <div class="panel panel-default">
+                <div class="panel-heading" style="text-align:center;">Personalización</div>
+                <div class="panel-body">
+                   <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Color</label>
+                            <div class="col-sm-10">
+                            <input type="color" class="form-control" id="colorUsuario" value="{{$user->color}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button id="guardarColor" type="button" class="btn btn-primary form-control" >Guardar Cambios</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+         </div>
     </div>
 </div>
-
+    
              <script>
                    var actualizaListaConocimientos = function(){
                        $.ajax({
@@ -233,7 +253,34 @@
                             }
                        });
                    });
+                $('button#guardarColor').click(function(){
+                        /*var url= $('input#colorUsuario').val();
+                        window.location.href='/user/cambiarColor/'+url;*/
+                        $.ajax({
+                            url:'/user/cambiarColor',
+                            type: 'POST',
+                            dataType: 'json',
+                            data:{
+                                'color' : $('input#colorUsuario').val()
+                            },
+                            beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                                var token = $('meta[name="csrf_token"]').attr('content');
+
+                                if (token) {
+                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                                }
+                            },
+                            success:function(response)
+                            {
+                                
+                                alert(response);
+                                location.reload();
+                            }
+                        });
+
+                   });
                 });
             </script>
 
 @endsection
+

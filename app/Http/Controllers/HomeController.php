@@ -31,7 +31,11 @@ class HomeController extends Controller
          $eventos = Evento::orderBy('id','ASC')->where('status',1)->paginate(5);
          return view('/user/verEventos')->with('eventos',$eventos);
     }
-
+    public function cambiarColor(Request $request)
+    {
+         DB::table('users')->where('email',Auth::user()->email)->update(['color'=>$request->color]);
+        return json_encode("Color Actualizado correctamente");
+    }
     public function configuracion()
     {
         return view('users/configuracionCuenta',['user' => Auth::user()]);

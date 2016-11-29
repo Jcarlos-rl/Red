@@ -1,34 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <div class="container">
-  <h2>Eventos</h2>
-   <div class="panel-body">
-               <table class="table table-striped">
-                        <thread>
-                            <tr>
-                                <th>#</th>
-                                <th>nombre</th>
-                                <th></th>
-                                
-                            </tr>
-                        </thread>
-                        <tbody>
-                            @foreach($eventos as $evento)
-                                <tr class="rowsTabla">
-                                    <th scope="row">{{$evento->id}}</th>
-                                    <th >{{$evento->nombre}}</th>
-                                    <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}" onclick="redirect({{$evento->id}})"></i></th>
-                                    
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {!! $eventos -> render() !!}
-                </div>
-  
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Eventos</h2>
+      <div class="panel panel-default">
+        <table class="table table-striped">
+          <thread>
+            <tr>
+              <th class="head"><h5>Id</h5></th>
+              <th class="head"><h5>Nombre</h5></th>
+              <th class="head"></th> 
+            </tr>
+          </thread>
+          <tbody>
+            @foreach($eventos as $evento)
+            <tr class="rowsTabla">
+              <th scope="row">{{$evento->id}}</th>
+              <th >{{$evento->nombre}}</th>
+              <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$evento->id}}" onclick="redirect({{$evento->id}})"></i></th>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        {!! $eventos -> render() !!}
+      </div>
+    </div>
+  </div>
 </div>
 <script>
 
@@ -40,6 +39,13 @@
 
 
 <style>
+    .head{
+      background-color: #5cb85c;
+      color: white; 
+    }
+    i.fa-plus-circle{
+      color: green;
+    }
     i.fa-plus-circle:hover{
         color:blue;
     }
