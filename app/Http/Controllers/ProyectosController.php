@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mail;
-use Session;
-use redirect;
-
 use App\Http\Requests;
 use App\Proyecto;
 use App\User;
@@ -156,17 +153,43 @@ class ProyectosController extends Controller
         $project = Proyecto::find($request->idProyecto);
         foreach ($request->idsUsuarios as $idUser) {
           $user = User::find($idUser);
+          $userLocal = Auth::user();
+          Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
+          {
+            $mensaje->to($user->email)
+                    ->subject('Invitación de colaboración de proyecto')
+                    ->from('betomax1636@gmail.com','Red Colaborativa');
+          });
           $user->proyectos()->attach($project);
         }
         return 'Invitacion enviada';
       }
     }
 
+    public function revisarSolicitud($value, $idUser, $idProyecto)
+    {
+      $proyecto = Proyecto::find($idProyecto);
+      $colaborador = $proyecto->users()->find($idUser);
+      if ($colaborador->pivot->status == 'WAITING') {
+        $proyecto->users()->detach($colaborador);
+        $proyecto->users()->attach($colaborador, ['status' => $value]);
+        return redirect()->route('welcome');
+      }
+      else {
+        return view('users/Proyecto/SolicitudColaborador/negacion');
+      }
+    }
+
     public function prueba()
     {
-      Mail::send('Email.index',[],function ($mensaje)
+      $project = Proyecto::find(5);
+      $user = User::find(1);
+      $userLocal = Auth::user();
+      Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
       {
-        $mensaje->to('appjak34@gmail.com');
+        $mensaje->to($user->email)
+                ->subject('Invitación de colaboración de proyecto')
+                ->from('betomax1636@gmail.com','Red Colaborativa');
       });
     }
 }

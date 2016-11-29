@@ -29,28 +29,30 @@
                             </thread>
                             <tbody>
                                 @foreach($proyectos as $proyecto)
-                                    <tr class="rowsTabla" id="{{$proyecto->id}}">
-                                        <th scope="row" id="projectName"><h4>{{$proyecto->nombre}}</h4></th>
-                                        <th class="text-center">
-                                          @if($proyecto->pivot->rol == 'ROLE_LEADER')
-                                            <span class="label label-success">Lider</span>
-                                          @else
-                                            <span class="label label-primary">Colaborador</span>
-                                          @endif
-                                        </th>
-                                        <th class="text-center">
-                                            <!-- Single button -->
-                                            <div class="btn-group">
-                                              @if($proyecto->pivot->rol == 'ROLE_LEADER')
-                                                <a href="{{route('user.proyectos.show',$proyecto->id)}}" class="btn btn-success btn-md">Ver</a>
-                                                <a href="{{route('user.proyectos.edit',$proyecto->id)}}" class="btn btn-primary btn-md">Editar</a>
-                                                <a href="#" class="btn btn-danger btn-md btn-delete">Eliminar</a>
-                                              @else
-                                                <a href="{{route('user.proyectos.show',$proyecto->id)}}" class="btn btn-success btn-md">Ver</a>
-                                              @endif
-                                            </div>
-                                        </th>
-                                    </tr>
+                                  @if($proyecto->pivot->status == 'ACCEPTED')                            
+                                      <tr class="rowsTabla" id="{{$proyecto->id}}">
+                                          <th scope="row" id="projectName"><h4>{{$proyecto->nombre}}</h4></th>
+                                          <th class="text-center">
+                                            @if($proyecto->pivot->rol == 'ROLE_LEADER')
+                                              <span class="label label-success">Lider</span>
+                                            @else
+                                              <span class="label label-primary">Colaborador</span>
+                                            @endif
+                                          </th>
+                                          <th class="text-center">
+                                              <!-- Single button -->
+                                              <div class="btn-group">
+                                                @if($proyecto->pivot->rol == 'ROLE_LEADER')
+                                                  <a href="{{route('user.proyectos.show',$proyecto->id)}}" class="btn btn-success btn-md">Ver</a>
+                                                  <a href="{{route('user.proyectos.edit',$proyecto->id)}}" class="btn btn-primary btn-md">Editar</a>
+                                                  <a href="#" class="btn btn-danger btn-md btn-delete">Eliminar</a>
+                                                @else
+                                                  <a href="{{route('user.proyectos.show',$proyecto->id)}}" class="btn btn-success btn-md">Ver</a>
+                                                @endif
+                                              </div>
+                                          </th>
+                                      </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

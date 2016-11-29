@@ -69,17 +69,19 @@
                     </thread>
                     <tbody>
                       @foreach($proyecto->users as $usuario)
-                        <tr id="{{$usuario->id}}">
-                          <th class="text-center">{{$usuario->name}}</th>
-                          <th class="text-center">
-                            @if($usuario->pivot->rol == 'ROLE_LEADER')
-                              <span class="label label-success">Lider</span>
-                            @else
-                              <span class="label label-primary">Colaborador</span>
-                            @endif
-                          </th>
-                          <th class="text-center"><span class="label label-info">{{$usuario->pivot->status}}</span></th>
-                        </tr>
+                        @if($usuario->pivot->status != 'REJECTED')    
+                          <tr id="{{$usuario->id}}">
+                            <th class="text-center">{{$usuario->name}}</th>
+                            <th class="text-center">
+                              @if($usuario->pivot->rol == 'ROLE_LEADER')
+                                <span class="label label-success">Lider</span>
+                              @else
+                                <span class="label label-primary">Colaborador</span>
+                              @endif
+                            </th>
+                            <th class="text-center"><span class="label label-info">{{$usuario->pivot->status}}</span></th>
+                          </tr>
+                        @endif
                       @endforeach
                     </tbody>
                   </table>

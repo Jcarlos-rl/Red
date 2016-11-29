@@ -13,9 +13,9 @@
     Rutas PUBLICAS
 */
 /* OJO.. AQUI no es necesario enviar a un controlador... la informacion sera estatica en las vistas a renderizar */
-Route::get('/', function () {
+Route::get('/', ['as'=>'welcome', function () {
     return view('welcome');
-});
+}]);
 /*
    Rutas de Inicio Sesion
 */
@@ -50,6 +50,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 });
 Route::get('email', 'ProyectosController@prueba');
+Route::get('email/confirmacion/{value}/{idUser}/{idProyecto}', 'ProyectosController@revisarSolicitud');
 /*
     Rutas de ADMIN
 */
