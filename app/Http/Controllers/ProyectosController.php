@@ -44,7 +44,7 @@ class ProyectosController extends Controller
         //dd($request-> all());
         $Proyecto = new Proyecto($request-> all());
         $Proyecto -> save();
-        $Proyecto->users()->attach(Auth::user(),['rol' => 'ROLE_LEADER']);
+        $Proyecto->users()->attach(Auth::user(),['rol' => 'ROLE_LEADER', 'status' => 'ACCEPTED']);
         return redirect()-> route('user.proyectos.index');
     }
 
@@ -153,7 +153,7 @@ class ProyectosController extends Controller
         $project = Proyecto::find($request->idProyecto);
         foreach ($request->idsUsuarios as $idUser) {
           $user = User::find($idUser);
-          $user->proyectos()->attach($project,['status' => 'WAITING']);
+          $user->proyectos()->attach($project);
         }
         return 'Invitacion enviada';
       }

@@ -85,7 +85,7 @@ Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'A
 ***       Admin Proyectos
 **/
 
-<<<<<<< HEAD
+
 Route::get('/user/eventos', 'EventoController@eventos');
 Route::get('/user/evento/{id}', 'EventoController@verEvento');
 Route::get('/user/proyecto/ver/{id}','EventoController@verProyecto');
@@ -99,11 +99,11 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
   Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 });
-=======
+
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
 Route::get('/admin/proyectos', ['middleware' => 'admin', 'uses' => 'AdminController@proyectos']);
 Route::get('/admin/proyecto/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoProyecto']);
->>>>>>> 0123a2fd4e5fb70ebc48cbe3109add0bed0a04ae
+
 
 
 /**
@@ -117,4 +117,3 @@ Route::get('/admin/user/{id}/editar',['middleware' => 'admin', 'uses' => 'AdminC
 Route::post('/admin/user/{id}/guardarCambios',['middleware' => 'admin','uses' => 'AdminController@guardarCambiosUsers']);
 Route::get('/admin/user/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoUsers']);
 Route::post('/admin/user/{id}/eliminar',['middleware' => 'admin', 'uses' => 'AdminController@eliminarUsers']);
-
