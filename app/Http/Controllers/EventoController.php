@@ -70,8 +70,15 @@ class EventoController extends Controller
     }
 
     public function proyectosUsuario(){
-        $proyectos = proyectos()->orderBy('id', 'ASC');
+        $proyectos = Auth::user()->proyectos()->select('*')->get();
          return json_encode($proyectos);
+    }
+
+    public function agregarProyecto(Request $request){
+        $proyecto = DB::table('proyectos')->where('id',$request->nombre)->update(['evento_id'=>1]);
+        $return=$request->nombre;
+        return json_encode($return);
+        //return view('users/Evento/proyectos');
     }
 
     /**
