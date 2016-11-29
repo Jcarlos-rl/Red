@@ -54,7 +54,7 @@ Route::get('/user/evento/{id}',['middleware'=>'auth','uses'=>'EventoController@v
 Route::get('/user/proyecto/ver/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
 Route::get('/user/evento/{id}/getInformacion',['middleware'=>'auth','uses'=>'AdminController@getInfoEvento']);
 Route::get('/user/evento/{id}/proyecto',['middleware'=>'auth','uses'=>'EventoController@verProyectos']);
-Route::get('/user/evento/proyecto/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
+Route::get('/user/evento/proyecto/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto1']);
 
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
