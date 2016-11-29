@@ -19,7 +19,7 @@
                     {!! Form::text('descripcion', null, ['class' => 'form-control', 'placeholder' => 'Descripcion...']) !!}
                   </div>
                   <div class="form-group">
-                  <br>
+                    <br>
                     {!! Form::submit('Agregar', ['class' => 'btn btn-success', 'style' => 'width:100%']) !!}
                   </div>
                   {!! Form::close() !!}
