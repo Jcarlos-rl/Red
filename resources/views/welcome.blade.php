@@ -14,21 +14,24 @@
             <div class="item active">
                 <img src="wallpaper1.jpg" class=" slideshow">
                 <div class="carousel-caption">
-                    <h3>Slideshow #1</h3>
+                    <h2>Registra proyectos</h2>
+                    <p class="res">Registra tus propios proyectos en diversoas eventos</p>
                 </div>
             </div>
 
             <div class="item">
                 <img src="wallpaper2.jpg" class=" slideshow">
                 <div class="carousel-caption">
-                    <h3>Slideshow #2</h3>
+                    <h2>Sé un colaborador</h2>
+                    <p class="res">Podras colaborar en diversos proyectos</p>
                 </div>
             </div>
 
             <div class="item">
                 <img src="wallpaper3.jpg" class="slideshow">
                 <div class="carousel-caption">
-                    <h3>Slideshow #3</h3>
+                    <h2>Innova</h2>
+                    <p class="res">Que nada te detenga a innovar</p>
                 </div>
             </div>
 
@@ -126,6 +129,10 @@ h5{
     font-size: 20px;
 }
 h4{
+    text-align: center;
+}
+.res{
+    letter-spacing: 1px;
     text-align: center;
 }
 .panel{
