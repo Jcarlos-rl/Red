@@ -98,8 +98,9 @@ class AdminController extends Controller
         return redirect('/admin/eventos');
     }
 	
-	//-------------------------------------------------------------------------------------//
-	public function proyectos()
+	//--------------------------------------Admin Proyectos-----------------------------------------------//
+	
+    public function proyectos()
     {
         $proyectos = DB::table('proyectos')->select('*')->get();
         return view('/admin/proyectos',['proyectos'=>$proyectos]);
@@ -107,7 +108,10 @@ class AdminController extends Controller
 
     public function getInfoProyecto(Request $request, $id)
     {
-        $proyectos = DB::table('proyectos')->select('*')->where('id',$id)->first();
+        $proyectos = DB::table('proyectos')
+            ->join('eventos', 'proyectos.evento_id', '=', 'eventos.id')
+            ->select('proyectos.*','eventos.nombre as evento')->where('proyectos.id',$id)
+            ->first();
         return json_encode($proyectos);
     }
 

@@ -28,8 +28,8 @@
 									<th class="text-center">
                                         <!-- Single button -->
                                         <div class="btn-group">
-                                        <button type="button" class="btn statusBtn" style="width:200%;" id="{{$proyecto->id}}" value="{{$proyecto->status}}">
-                                           <i class="fa fa-bullseye" aria-hidden="true"></i>
+                                        <button type="button" class="btn statusBtn" style="width: 200%" id="{{$proyecto->id}}" value="{{$proyecto->status}}">
+                                           <i class="fa fa-book" aria-hidden="true"></i>
                                         </button>
                                         </div>
                                     </th>
@@ -97,7 +97,7 @@
                             '</div>'+
 							'<div class="row">'+
                                 '<div class="col-sm-12">'+
-                                    '<p class="lead">'+response.evento_id+'</p>'+
+                                    '<p class="lead">'+response.evento+'</p>'+
                                 '</div>'+
                             '</div>'+
                         '</div>'
