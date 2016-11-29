@@ -62,7 +62,7 @@
                                      Si el usuario es ADMIN
                          ***********************************************************-->
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/admin') }}">Inicio</a></li>
+                            <li><a href="{{ url('/') }}">Inicio</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/admin/eventos') }}">Eventos</a></li>
@@ -78,7 +78,7 @@
                                      Si el usuario es ADMIN EVENTOS
                          ***********************************************************-->
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/admin') }}">Inicio</a></li>
+                            <li><a href="{{ url('/') }}">Inicio</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/admin/eventos') }}">Eventos</a></li>
@@ -88,7 +88,7 @@
                                      Si el usuario es ADMIN PROYECTOS
                          ***********************************************************-->
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/admin') }}">Inicio</a></li>
+                            <li><a href="{{ url('/') }}">Inicio</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/admin/proyectos') }}">Proyectos</a></li>

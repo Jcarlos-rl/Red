@@ -15,7 +15,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
-                                <th></th>
+                                <th>Detalles</th>
                                 <th class="text-center">Status</th>                              
                             </tr>
                         </thread>
@@ -28,7 +28,7 @@
 									<th class="text-center">
                                         <!-- Single button -->
                                         <div class="btn-group">
-                                        <button type="button" class="btn statusBtn" id="{{$proyecto->id}}" value="{{$proyecto->status}}">
+                                        <button type="button" class="btn statusBtn" style="width:200%;" id="{{$proyecto->id}}" value="{{$proyecto->status}}">
                                            <i class="fa fa-bullseye" aria-hidden="true"></i>
                                         </button>
                                         </div>
