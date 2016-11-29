@@ -151,7 +151,7 @@ class AdminController extends Controller
 
     public function eliminarUsers(Request $request, $id)
     {
-        DB::table('user')->where('id',$id)->delete();
+        DB::table('users')->where('id',$id)->delete();
 
         return redirect('/admin/users');
     }

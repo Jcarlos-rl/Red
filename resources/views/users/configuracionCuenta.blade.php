@@ -14,20 +14,45 @@
                             <input type="text" class="form-control" id="nombreUsuario" value="{{$user->name}}">
                             </div>
                         </div>
-                        <!--
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Foto Perfil</label>
-                            <div class="col-sm-10">
-                            <input type="file" class="form-control" name="imagen">
-                            </div>
-                        </div>
-                        -->
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarDatosPersonales" type="button" class="btn btn-primary form-control" >Guardar Cambios</button>
+                                <button id="guardarDatosPersonales" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
                             </div>
                         </div>
                     </form>
+                    <div class="col-md-12">
+                        <form class="form-horizaontal" method="POST" action="/user/subirImagenPerfil" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                            <div class="form-group">
+                                <label class="perfil col-sm-3 control-label">Foto Perfil</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" name="imagen">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <br>
+                            </div>
+                            <div class="col-md-12">
+                                <center><img src="{{ asset( 'imagenesPerfil/' . $user->imagenPerfil)}}" class="img-responsive" style="object-fit:cover; width:100%; max-width:150px;"></center>
+                            </div>
+                            <div class="col-sm-12">
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <button type="submit" class="btn btn-primary form-control" >Cambiar Imagen</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <style>
+                    .perfil{
+                        margin-left: -20px;
+                    }
+                    </style>
+                    
+
                 </div>
             </div>
             <div class="panel panel-default">
@@ -55,14 +80,11 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarCambios" type="button" class="btn btn-warning form-control" >Guardar Cambios</button>
+                                <button id="guardarCambios" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <button id="guardarCambios" type="button" class="btn btn-danger form-control" >Eliminar Cuenta</button>
             </div>
         </div>
         <div class="col-md-6">
@@ -112,15 +134,22 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarColor" type="button" class="btn btn-primary form-control" >Guardar Cambios</button>
+                                <button id="guardarColor" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <button id="guardarCambios" type="button" class="btn btn-danger form-control" >Eliminar Cuenta</button>
+            </div>
          </div>
     </div>
 </div>
+<style>
+
+</style>
+
     
              <script>
                    var actualizaListaConocimientos = function(){
