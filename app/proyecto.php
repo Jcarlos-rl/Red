@@ -16,4 +16,3 @@ class Proyecto extends Model
         return $this->belongsToMany('App\User','users_proyectos','proyecto_id','user_id')->withPivot('rol')->withPivot('fecha_registro')->withPivot('status');
     }
 }
-

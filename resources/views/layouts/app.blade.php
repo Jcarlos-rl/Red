@@ -32,7 +32,7 @@
         }
     </style>
 </head>
-<body id="app-layout">
+<body id="app-layout" onload="miFuncion()">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -126,11 +126,18 @@
 										case 'us':	echo '[Usuario]';
 													break;
 									}
+
                                 @endphp
+
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                    <script>
+                                    function miFuncion(){           
+                                        $("nav").css('background-color','{{Auth::user()->color}}');
+                                    }
+                                </script>
                                 <li><a href="{{url('/user/configuracion')}}"<i class="fa fa-cog" aria-hidden="true"></i>  Configuración Cuenta</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out" aria-hidden="true"></i>Cerrar Sesión</a></li>
                             </ul>
@@ -304,8 +311,6 @@
         </div>
     </div>
     </div>
-
-
     <script>
         var nuevos_mensajes = function()
         {

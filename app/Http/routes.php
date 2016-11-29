@@ -36,6 +36,7 @@ Route::post('/user/bandejaEntrada/',['middleware'=>'auth','uses'=>'HomeControlle
 Route::post('/user/bandejaLeidos/',['middleware'=>'auth','uses'=>'HomeController@bandejaLeidos']);
 Route::post('/user/verMensaje',['middleware'=>'auth','uses'=>'HomeController@verMensaje']);
 Route::post('/user/cambiarColor',['middleware'=>'auth','uses'=>'HomeController@cambiarColor']);
+
 Route::get('/user/eventos',['middleware'=>'auth','uses'=>'EventoController@eventos']);
 Route::get('/user/evento/{id}',['middleware'=>'auth','uses'=>'EventoController@verEvento']);
 Route::get('/user/proyecto/ver/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
@@ -67,9 +68,11 @@ Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'A
 /**
 ***       Admin Proyectos
 **/
+
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
 Route::get('/admin/proyectos', ['middleware' => 'admin', 'uses' => 'AdminController@proyectos']);
 Route::get('/admin/proyecto/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoProyecto']);
+
 /**
 ***       Admin users
 **/
