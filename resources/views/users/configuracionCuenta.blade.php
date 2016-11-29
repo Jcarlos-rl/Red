@@ -24,7 +24,7 @@
                         -->
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarDatosPersonales" type="button" class="btn btn-primary form-control" >Guardar Cambios</button>
+                                <button id="guardarDatosPersonales" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
                             </div>
                         </div>
                     </form>
@@ -55,14 +55,11 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarCambios" type="button" class="btn btn-warning form-control" >Guardar Cambios</button>
+                                <button id="guardarCambios" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <button id="guardarCambios" type="button" class="btn btn-danger form-control" >Eliminar Cuenta</button>
             </div>
         </div>
         <div class="col-md-6">
@@ -112,15 +109,19 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarColor" type="button" class="btn btn-primary form-control" >Guardar Cambios</button>
+                                <button id="guardarColor" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <button id="guardarCambios" type="button" class="btn btn-danger form-control" >Eliminar Cuenta</button>
+            </div>
          </div>
     </div>
 </div>
+
     
              <script>
                    var actualizaListaConocimientos = function(){

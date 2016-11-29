@@ -8,13 +8,16 @@
                 <div class="panel-body">
                   {!! Form::open(['route'=>[ 'user.proyectos.update',$proyecto],'method' => 'PUT']) !!}
                   <div class="form-group">
-                  <h1> Titulo del Proyecto </h1>
+                  <h3> Titulo del Proyecto </h3>
                     {!! Form::text('nombre',$proyecto->nombre, ['class' => 'form-control']) !!}
                   </div>
                   <div class="form-group">
-                  <h1> Descripcion </h1>
+                  <h3> Descripcion </h3>
                     {!! Form::text('descripcion',$proyecto->descripcion, ['class' => 'form-control']) !!}
                   </div>
+                  <h3>Imagen</h3>
+                    <input type="file" class="form-control" name="imagen">
+                  <br>
                   <div class="form-group">
                     {!! Form::submit('Actualizar', ['class' => 'btn btn-success']) !!}
                   </div>

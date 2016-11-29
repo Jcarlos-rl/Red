@@ -15,7 +15,7 @@
                 <img src="wallpaper1.jpg" class=" slideshow">
                 <div class="carousel-caption">
                     <h2>Registra proyectos</h2>
-                    <p class="res">Registra tus propios proyectos en diversoas eventos</p>
+                    <p class="res">Registra tus propios proyectos en diversos eventos</p>
                 </div>
             </div>
 

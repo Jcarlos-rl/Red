@@ -19,6 +19,9 @@
                     {!! Form::text('descripcion', null, ['class' => 'form-control', 'placeholder' => 'Descripcion...']) !!}
                   </div>
                   <div class="form-group">
+                    {!! Form::label('Imagen','Imagen')!!}
+                    <input type="file" class="form-control" name="imagen">                    
+                  </div>
                   <br>
                     {!! Form::submit('Agregar', ['class' => 'btn btn-success', 'style' => 'width:100%']) !!}
                   </div>
