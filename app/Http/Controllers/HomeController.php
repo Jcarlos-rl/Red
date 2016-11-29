@@ -47,6 +47,21 @@ class HomeController extends Controller
         return json_encode("Datos Actualizados correctamente");
     }
 
+    public function subirImagenPerfil(Request $request)
+    {
+        $nombreImagen = "";
+        if($request->hasFile('imagen'))
+        {
+            $nombreImagen = $request->file('imagen')->getClientOriginalName();
+            $request->file('imagen')->move(base_path() . '/public/imagenesPerfil/', $nombreImagen);
+        }
+        DB::table('users')->where('email',Auth::user()->email)->update([
+                'imagenPerfil' => $nombreImagen
+        ]);
+
+        return redirect('/user/configuracion');
+    }
+
     public function getConocimientos()
     {
         $conocimientos = DB::table('conocimientos')->select('*')->get();

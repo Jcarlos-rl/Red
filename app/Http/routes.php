@@ -30,6 +30,7 @@ Route::post('/getMisConocimientos',['middleware'=>'auth','uses'=>'HomeController
 Route::post('/eliminaConocimiento',['middleware'=>'auth','uses'=>'HomeController@eliminaConocimiento']);
 Route::get('/user/configuracion',['middleware'=>'auth','uses'=>'HomeController@configuracion']);
 Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
+Route::post('/user/subirImagenPerfil',['middleware'=>'auth','uses'=>'HomeController@subirImagenPerfil']);
 Route::post('/user/getListaDestinatarios',['middleware'=>'auth','uses'=>'HomeController@getListaDestinatarios']);
 Route::post('/user/nuevoMensaje',['middleware'=>'auth','uses'=>'HomeController@nuevoMensaje']);
 Route::post('/user/bandejaEntrada/',['middleware'=>'auth','uses'=>'HomeController@bandejaEntrada']);
