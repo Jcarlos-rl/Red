@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use Session;
+use redirect;
 
 use App\Http\Requests;
 use App\Proyecto;
 use App\User;
+use App\Conocimiento;
 
 class ProyectosController extends Controller
 {
@@ -43,7 +47,7 @@ class ProyectosController extends Controller
         //dd($request-> all());
         $Proyecto = new Proyecto($request-> all());
         $Proyecto -> save();
-        $Proyecto->users()->attach(Auth::user(),['rol' => 'ROLE_LEADER']);
+        $Proyecto->users()->attach(Auth::user(),['rol' => 'ROLE_LEADER', 'status' => 'ACCEPTED']);
         return redirect()-> route('user.proyectos.index');
     }
 
@@ -107,13 +111,38 @@ class ProyectosController extends Controller
       return redirect()->route('user.proyectos.index');
     }
 
-    public function searchUser(Request $request)
+    public function searchConoimientos(Request $request)
     {
       if ($request->ajax()) {
-        $data = User::where('name', 'LIKE', "%$request->name%")->get();
+        $data = Conocimiento::where('nombre', 'LIKE', "%$request->name%")->get();
+        $conocimientos = array();
+        foreach ($data as $conocimiento) {
+          array_push($conocimientos,['value' => $conocimiento->id, 'label' => $conocimiento->nombre]);
+        }
+        return response()->json([
+          'conocimientos' => $conocimientos
+        ]);
+      }
+    }
+
+    public function searchUsers(Request $request)
+    {
+      $colaboradores = Proyecto::find($request->idProyecto)->users;
+      if ($request->ajax()) {
+        $conocimiento = Conocimiento::find($request->id);
+        $data = $conocimiento->users;
         $users = array();
         foreach ($data as $user) {
-          array_push($users,['value' => $user->email, 'label' => $user->name]);
+          $bandera = false;
+          foreach ($colaboradores as $colaborador) {
+            if ($user->id == $colaborador->id) {
+              $bandera = true;
+              break;
+            }
+          }
+          if ($bandera == false) {
+            array_push($users,$user);
+          }
         }
         return response()->json([
           'users' => $users
@@ -124,11 +153,20 @@ class ProyectosController extends Controller
     public function sendEmails(Request $request)
     {
       if ($request->ajax()) {
-        $texto = '';
-        foreach ($request->emails as $email) {
-          $texto .= $email.' ';
+        $project = Proyecto::find($request->idProyecto);
+        foreach ($request->idsUsuarios as $idUser) {
+          $user = User::find($idUser);
+          $user->proyectos()->attach($project);
         }
-        return $texto;
+        return 'Invitacion enviada';
       }
+    }
+
+    public function prueba()
+    {
+      Mail::send('Email.index',[],function ($mensaje)
+      {
+        $mensaje->to('appjak34@gmail.com');
+      });
     }
 }

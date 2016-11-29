@@ -23,6 +23,7 @@
                     <input type="file" class="form-control" name="imagen">                    
                   </div>
                   <br>
+                    <br>
                     {!! Form::submit('Agregar', ['class' => 'btn btn-success', 'style' => 'width:100%']) !!}
                   </div>
                   {!! Form::close() !!}
