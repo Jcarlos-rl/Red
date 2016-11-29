@@ -55,6 +55,7 @@ Route::get('/user/proyecto/ver/{id}',['middleware'=>'auth','uses'=>'EventoContro
 Route::get('/user/evento/{id}/getInformacion',['middleware'=>'auth','uses'=>'AdminController@getInfoEvento']);
 Route::get('/user/evento/{id}/proyecto',['middleware'=>'auth','uses'=>'EventoController@verProyectos']);
 Route::get('/user/evento/proyecto/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto1']);
+Route::post('user/proyectos-usuario',['middleware'=>'auth','uses'=>'EventoController@proyectosUsuario']);
 
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){

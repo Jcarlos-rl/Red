@@ -8,10 +8,12 @@
     </div>
     @else
 <div class="container">
-    <h2>Proyectos</h2>
+    
    
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+        <h2>Proyectos</h2>
+         <button class="btn btn-success" style="width:100%;" id="agregarProyect" data-toggle="modal" data-target="#agregarProyecto">Agregar Proyecto</button>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <table class="table table-striped">
@@ -72,11 +74,28 @@
            <p class="lead" style="text-align:center;">¿Estás seguro de enviar la solicitud?</p>
       </div>
       <div class="modal-footer">
-        <form method="POST" action="" id="EnviarSolicitud">
-            {{ csrf_field() }}
-            <button type="submit" class="btn btn-danger" style="width:100%;">SI</button>
-        </form>
+             <button type="submit" class="btn btn-danger" style="width:100%;" id="SolicitudEnviada">SI</button>
+        
         <button type="button" class="btn btn-default" style="width:100%;" data-dismiss="modal">NO</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="agregarProyecto" tabindex="-1" role="dialog" aria-labelledby="Agregar Proyecto">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+           <p class="lead" style="text-align:center;">Mis Proyectos</p>
+      </div>
+      <div class="modal-body">
+            <select id="projects" style="width:100%;">
+                
+            </select>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-default" style="width:100%;" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -85,15 +104,40 @@
 
 <script>
     $(document).ready(function(){
+        $('button#SolicitudEnviada').click(function(){
 
-    /*Falya definir la funcion que hará al enviar la solicitud 
-    $('#solicitarColaboracion').click(function(){
-           $('#solicitarModal').modal('show');
-           $('form#EnviarSolicitud').attr('action','');
-         });
+            alert("Solicitud Enviada Correctamente");
+        });  
+        $('select#projects').click(function(){
+            $.ajax({
+               url:'user/proyectos-usuario',
+               type:'POST',
+               dataType: 'json',
+               beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
+                   var token = $('meta[name="csrf_token"]').attr('content');
+                   if (token) {
+                      return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                  }
+               
+              },
+              alert("Hola");
+              success:function(response)
+              {
+                  alert("Hola");
+                  for(var i=0; i<response.length; i++){
+                        $('select').append(
+                            '<option value="'+response[i].nombre+'"></option>'
+                        );
+                  }
+              }
+          });
+       });
+    
 
     });
-    */
+
+
+    
      function redirect(x){
         var url = "../proyecto/"+x;
         window.location.href = url;

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Evento;
 use App\Proyecto;
+use App\User;
+
 
 class EventoController extends Controller
 {
@@ -64,6 +67,11 @@ class EventoController extends Controller
         $proyecto = Proyecto::select('*')->where('id',$id)->first();
         return view('users/Evento/verEventos')->with('proyecto', $proyecto);
 
+    }
+
+    public function proyectosUsuario(){
+        $proyectos = proyectos()->orderBy('id', 'ASC');
+         return json_encode($proyectos);
     }
 
     /**
