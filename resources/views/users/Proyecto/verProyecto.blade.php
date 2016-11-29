@@ -37,8 +37,17 @@
                     <tbody id="collaborators">
                     </tbody>
                   </table>
+                  <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th class="text-center">Nombre</th>
+                        </tr>
+                    </thread>
+                    <tbody id="selectedCollaborators">
+                    </tbody>
+                  </table>
                   <div class="form-group">
-                    <button class="btn btn-success" type="button" name="button" id="btnSend">Invitar</button>
+                    <button class="btn btn-success" type="button" style="width:100%;" name="btnSend" id="btnSend">Invitar</button>
                   </div>
                 </div>
             </div>
@@ -55,6 +64,7 @@
                         <tr>
                             <th class="text-center">Nombre</th>
                             <th class="text-center">Rol</th>
+                            <th class="text-center">Status</th>
                         </tr>
                     </thread>
                     <tbody>
@@ -68,6 +78,7 @@
                               <span class="label label-primary">Colaborador</span>
                             @endif
                           </th>
+                          <th class="text-center"><span class="label label-info">{{$usuario->pivot->status}}</span></th>
                         </tr>
                       @endforeach
                     </tbody>
@@ -79,12 +90,13 @@
 </div>
 @endsection
 @section('javascripts')
+  <script src="{{ asset('js/bootbox.min.js') }}" charset="utf-8"></script>
   <script src="{{ asset('js/jquery-ui.min.js') }}" charset="utf-8"></script>
-  <script src="{{ asset('js/md5.min.js') }}" charset="utf-8"></script>
   <script src="{{ asset('js/proyectos/search-collaborator.js') }}" charset="utf-8"></script>
   <script src="{{ asset('js/proyectos/send-invitation.js') }}" charset="utf-8"></script>
   <script type="text/javascript">
     var token = '{{ Session::token() }}';
     var template = '@include("users/templates/filaColaborador")';
+    var idProject = '{{ $proyecto->id }}'
   </script>
 @endsection
