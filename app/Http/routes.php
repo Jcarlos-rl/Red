@@ -30,6 +30,10 @@ Route::post('/getMisConocimientos',['middleware'=>'auth','uses'=>'HomeController
 Route::post('/eliminaConocimiento',['middleware'=>'auth','uses'=>'HomeController@eliminaConocimiento']);
 Route::get('/user/configuracion',['middleware'=>'auth','uses'=>'HomeController@configuracion']);
 Route::post('/user/actualizaDatosUsuario',['middleware'=>'auth', 'uses'=>'HomeController@actualizaDatosUsuario']);
+
+/*Route::post('/user/buscarNombre',['middleware' => 'auth', 'uses' =>'HomeController@buscarNombre']);
+Route::post('/user/buscarConocimiento',['middleware' => 'auth', 'uses' =>'HomeController@buscarConocimiento']);*/
+
 Route::post('/user/getListaDestinatarios',['middleware'=>'auth','uses'=>'HomeController@getListaDestinatarios']);
 Route::post('/user/nuevoMensaje',['middleware'=>'auth','uses'=>'HomeController@nuevoMensaje']);
 Route::post('/user/bandejaEntrada/',['middleware'=>'auth','uses'=>'HomeController@bandejaEntrada']);
@@ -37,20 +41,26 @@ Route::post('/user/bandejaLeidos/',['middleware'=>'auth','uses'=>'HomeController
 Route::post('/user/verMensaje',['middleware'=>'auth','uses'=>'HomeController@verMensaje']);
 Route::post('/user/cambiarColor',['middleware'=>'auth','uses'=>'HomeController@cambiarColor']);
 
+
 Route::get('/user/eventos',['middleware'=>'auth','uses'=>'EventoController@eventos']);
 Route::get('/user/evento/{id}',['middleware'=>'auth','uses'=>'EventoController@verEvento']);
-Route::get('/user/proyecto/ver/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
-Route::get('/user/evento/{id}/getInformacion',['middleware'=>'auth','uses'=>'AdminController@getInfoEvento']);
 Route::get('/user/evento/{id}/proyecto',['middleware'=>'auth','uses'=>'EventoController@verProyectos']);
-Route::get('/user/evento/proyecto/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
+Route::post('/user/evento/agregarProyecto',['middleware' => 'auth', 'uses'=>'EventoController@agregarProyecto']);
+Route::post('/user/evento/agregarEvento',['middleware' => 'auth', 'uses' => 'EventoController@agregarEvento']);
+Route::post('/user/evento/sacarProyecto',['middleware' => 'auth', 'uses' => 'EventoController@sacarProyecto']);
+
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::resource('proyectos','ProyectosController');
   Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUsers']);
   Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
   Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 });
-Route::get('email', 'ProyectosController@prueba');
-Route::get('email/confirmacion/{value}/{idUser}/{idProyecto}', 'ProyectosController@revisarSolicitud');
+
+Route::post('/proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUser']);
+Route::post('/proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
+Route::post('/proyecto/sacarProyecto', ['as'=>'user.proyecto.sacarProyecto', 'uses' => 'ProyectosController@sacarProyecto']);
+
+
 /*
     Rutas de ADMIN
 */

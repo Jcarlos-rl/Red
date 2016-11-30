@@ -89,18 +89,4 @@
     });
  
 </script>
-
-
-<style>
-    i.fa-plus-circle:hover{
-        color:blue;
-    }
-    i.fa-pencil-square:hover{
-        color:green;
-    }
-    i.fa-trash:hover{
-        color:red;
-    }
-</style>
-
 @endsection

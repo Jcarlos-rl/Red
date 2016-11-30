@@ -15,7 +15,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                   <h3>Descripción</h3>
-                  <textarea name="descripcion" rows="8" cols="80" readonly>{{$proyecto->descripcion}}</textarea>
+                  <textarea name="descripcion" rows="11" cols="80" readonly>{{$proyecto->descripcion}}</textarea>
                 </div>
             </div>
         </div>
@@ -25,8 +25,9 @@
                 <div class="panel-body">
                   <h3>Buscar Colaborador</h3>
                   <div class="form-group">
-                    {!! Form::label('nombre', 'nombre') !!}
+                    {!! Form::label('nombre', 'Nombre') !!}
                     {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre...', 'id' => 'collaboratorText', 'autocomplete'=>'off']) !!}
+                    <button class="btn btn-success" id="porNombre" style="margin:.5em">Buscar</button><br/>
                   </div>
                   <table class="table table-striped">
                     <thread>
@@ -101,4 +102,6 @@
     var template = '@include("users/templates/filaColaborador")';
     var idProject = '{{ $proyecto->id }}'
   </script>
+
+
 @endsection
