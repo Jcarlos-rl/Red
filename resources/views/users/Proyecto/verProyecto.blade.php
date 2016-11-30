@@ -25,14 +25,8 @@
                 <div class="panel-body">
                   <h3>Buscar Colaborador</h3>
                   <div class="form-group">
-<!--M-->
-                    {!! Form::label('nombre', 'Nombre') !!}
-                    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre...', 'id' => 'collaboratorText', 'autocomplete'=>'off']) !!}
-                    <button class="btn btn-success" id="porNombre" style="margin:.5em">Buscar</button><br/>
-<!---->
                     {!! Form::label('nombre', 'Conocimiento') !!}
                     {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Conocimiento...', 'id' => 'collaboratorText', 'autocomplete'=>'off']) !!}
-<!---->
                   </div>
                   <table class="table table-striped">
                     <thread>

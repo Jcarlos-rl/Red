@@ -26,6 +26,7 @@ $(document).ready(function(){
           var url = '../proyecto/buscarConocimiento';
 
           $.post(url, data, function(response) {
+            //console.log(response);
             $( "#collaboratorText" ).autocomplete({
               source: response.conocimientos,
               minLength: 1,
