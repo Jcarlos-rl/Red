@@ -150,7 +150,7 @@ class ProyectosController extends Controller
     private function enviarCorreo($user)
     {
       $userLocal = Auth::user();
-      Mail::send('Email.index',['local' => $userLocal, 'usuario' => $existe, 'proyecto' => $project],function ($mensaje) use ($user)
+      Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
       {
         $mensaje->to($user->email)
                 ->subject('Invitación de colaboración de proyecto')
@@ -168,11 +168,25 @@ class ProyectosController extends Controller
           if ($existe) {
             $usuarios -> detach($existe) ;
             $usuarios -> attach($existe,['status' =>'WAITING']);
-            enviarCorreo($existe);
+            $userLocal = Auth::user();
+            Mail::send('Email.index',['local' => $userLocal, 'usuario' => $existe, 'proyecto' => $project],function ($mensaje) use ($existe)
+            {
+              $mensaje->to($existe->email)
+                      ->subject('Invitación de colaboración de proyecto')
+                      ->from('betomax1636@gmail.com','Red Colaborativa');
+            });
+            //$this->enviarCorreo($existe);
           }
           else {
             $user = User::find($idUser);
-            enviarCorreo($user);
+            $userLocal = Auth::user();
+            Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
+            {
+              $mensaje->to($user->email)
+                      ->subject('Invitación de colaboración de proyecto')
+                      ->from('betomax1636@gmail.com','Red Colaborativa');
+            });
+            //$this->enviarCorreo($user);
             $user->proyectos()->attach($project);
           }
         }
@@ -184,10 +198,15 @@ class ProyectosController extends Controller
     {
       $proyecto = Proyecto::find($idProyecto);
       $colaborador = $proyecto->users()->find($idUser);
-      if ($colaborador->pivot->status == 'WAITING' ) {
-        $proyecto->users()->detach($colaborador);
-        $proyecto->users()->attach($colaborador, ['status' => $value]);
-        return redirect()->route('welcome');
+      if ($colaborador) {
+        if ($colaborador->pivot->status == 'WAITING' ) {
+          $proyecto->users()->detach($colaborador);
+          $proyecto->users()->attach($colaborador, ['status' => $value]);
+          return redirect()->route('welcome');
+        }
+        else {
+          return view('users/Proyecto/SolicitudColaborador/negacion');
+        }
       }
       else {
         return view('users/Proyecto/SolicitudColaborador/negacion');
