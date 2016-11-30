@@ -25,13 +25,9 @@
                 <div class="panel-body">
                   <h3>Buscar Colaborador</h3>
                   <div class="form-group">
-                    {!! Form::label('nombre', 'Por Nombre') !!}
+                    {!! Form::label('nombre', 'Nombre') !!}
                     {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre...', 'id' => 'collaboratorText', 'autocomplete'=>'off']) !!}
                     <button class="btn btn-success" id="porNombre" style="margin:.5em">Buscar</button><br/>
-                    {!! Form::label('conocimiento', 'Por Conocimiento') !!}
-                    {!! Form::text('conocimiento', null, ['class' => 'form-control', 'placeholder' => 'Conocimiento...', 'id' => 'conocimientoText', 'autocomplete'=>'off']) !!}
-                    <button class="btn btn-success" id="porConocimiento"style="margin:.5em">Buscar</button>
-
                   </div>
                   <table class="table table-striped">
                     <thread>
@@ -92,63 +88,6 @@
     var token = '{{ Session::token() }}';
     var template = '@include("users/templates/filaColaborador")';
   </script>
-  <script>
-    $(document).ready(function(){
-        $('#porNombre').click(function(){
-           $.ajax({
-                url:'/user/buscarNombre',
-                type: 'POST',
-                dataType: 'json',
-                data:{
-                   'nombre' : $('collaboratorText').val()
-                },
-                beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
-                      var token = $('meta[name="csrf_token"]').attr('content');
-                      if (token) {
-                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                      }
-               },
-               success:function(response){
-                 alert("Hola");
-                 for(var i=0; i<response.length; i++){
-                   $('tbody#collaborators').append(
-                     '<th>'+reponse[i].nombre+'</th>'
-                     alert(response[i].nombre);
-                   );
-                 }
-                   
-               }
-                  
-        });
-      
 
-       $('#porConocimiento').click(function(){
-           $.ajax({
-                url:'/user/buscarConocimiento',
-                type: 'POST',
-                dataType: 'json',
-                data:{
-                   'nombre' : $('input#conocimientoText').val()
-                },
-                beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
-                      var token = $('meta[name="csrf_token"]').attr('content');
-                      if (token) {
-                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                      }
-               },
-               success:function(response){
-                 for(var i=0; i<response.length; i++){
-                   $('tbody#collaborators').append(
-                     '<th>'+reponse[i].nombre+'</th>'
-                   );
-                 }
-                   
-               }
-                  
-
-    });
-
-
-  </script>
 
 @endsection

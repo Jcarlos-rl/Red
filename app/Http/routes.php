@@ -51,12 +51,11 @@ Route::post('/user/verMensaje',['middleware'=>'auth','uses'=>'HomeController@ver
 
 Route::get('/user/eventos',['middleware'=>'auth','uses'=>'EventoController@eventos']);
 Route::get('/user/evento/{id}',['middleware'=>'auth','uses'=>'EventoController@verEvento']);
-Route::get('/user/proyecto/ver/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
-Route::get('/user/evento/{id}/getInformacion',['middleware'=>'auth','uses'=>'AdminController@getInfoEvento']);
 Route::get('/user/evento/{id}/proyecto',['middleware'=>'auth','uses'=>'EventoController@verProyectos']);
-Route::get('/user/evento/proyecto/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto1']);
-Route::post('/user/proyectos-usuario',['middleware'=>'auth','uses'=>'EventoController@proyectosUsuario']);
 Route::post('/user/evento/agregarProyecto',['middleware' => 'auth', 'uses'=>'EventoController@agregarProyecto']);
+Route::post('/user/evento/agregarEvento',['middleware' => 'auth', 'uses' => 'EventoController@agregarEvento']);
+Route::post('/user/evento/sacarProyecto',['middleware' => 'auth', 'uses' => 'EventoController@sacarProyecto']);
+
 
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
@@ -65,6 +64,9 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
 
 Route::post('/proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUser']);
 Route::post('/proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
+Route::post('/proyecto/sacarProyecto', ['as'=>'user.proyecto.sacarProyecto', 'uses' => 'ProyectosController@sacarProyecto']);
+
+
 
 
 

@@ -105,12 +105,6 @@ class HomeController extends Controller
     }
 
 
-    public function buscarNombre(Request $request){
-        $users = DB::table('users')->where('nombre',$request->nombre);
-        return json_encode($users);
-    }
-
-
     public function getListaDestinatarios()
     {
        $usuarios =  DB::table('users')->select('*')->get();

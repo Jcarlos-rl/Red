@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Proyecto;
 use App\User;
@@ -18,9 +18,13 @@ class ProyectosController extends Controller
      */
     public function index()
     {
-      $proyectos = Auth::user()->proyectos()->orderBy('id', 'ASC')->paginate(5);
+      $proyectos = Auth::user()->proyectos()
+        ->leftJoin('eventos', 'eventos.id', '=', 'proyectos.evento_id')
+        ->orderBy('id', 'ASC')
+        ->select('eventos.nombre as eventoNombre','proyectos.id','proyectos.nombre','proyectos.descripcion')
+        ->paginate(5);
       return view('users/Proyecto/listProyectos')->with('proyectos', $proyectos);
-    }
+  }
 
     /**
      * Show the form for creating a new resource.

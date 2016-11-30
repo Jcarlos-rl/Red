@@ -20,8 +20,6 @@ class EventoController extends Controller
      */
 
      public function eventos(){
-         //$eventos = DB::table('eventos')->select('nombre');
-         //$eventos = DB::table('eventos')->get()->paginate(4);
          $eventos = Evento::orderBy('id','ASC')->where('status',1)->paginate(5);
          return view('/users/Evento/verEventos')->with('eventos',$eventos);
 
@@ -30,7 +28,6 @@ class EventoController extends Controller
 
      public function verEvento(Request $request, $id){
          $evento = DB::table('eventos')->select('*')->where('id',$id)->first();
-         //$evento = DB::table('eventos')->join('proyectos', 'proyectos.evento_id','=','eventos.id')->select('*')->where('eventos.id',$id)->first();
         return view('/users/Evento/verEvento',['evento'=>$evento]);
      }
 
@@ -42,12 +39,6 @@ class EventoController extends Controller
     {
         //
     }
- public function verProyecto1(Request $request, $id){
-        $proyecto = DB::table('proyectos')->select('*')->where('id',$id)->first();
-        return view('/users/Evento/verProyecto', compact('proyecto'));
-    }
-
-
      public function getInfoEvento(Request $request, $id)
     {
         $eventos = DB::table('eventos')->select('*')->where('id',$id)->first();
@@ -63,22 +54,22 @@ class EventoController extends Controller
     {
         //
     }
-    public function verProyecto(Request $request,$id){
-        $proyecto = Proyecto::select('*')->where('id',$id)->first();
-        return view('users/Evento/verEventos')->with('proyecto', $proyecto);
-
-    }
-
-    public function proyectosUsuario(){
-        $proyectos = Auth::user()->proyectos()->select('*')->get();
-         return json_encode($proyectos);
-    }
-
     public function agregarProyecto(Request $request){
-        $proyecto = DB::table('proyectos')->where('id',$request->nombre)->update(['evento_id'=>1]);
-        $return=$request->nombre;
-        return json_encode($return);
+        $proyecto = DB::table('proyectos')->where('id',$request->id)->update(['evento_id'=>$request->evento]);
+        return json_encode("Almacenado Correctamente");
         //return view('users/Evento/proyectos');
+    }
+
+    //Funcion para llenar los select con todos los eventos
+    public function agregarEvento(){
+        $eventos = DB::table('eventos')->where('status',1)->get();
+        return json_encode($eventos);
+    }
+
+    public function sacarProyecto(Request $request){
+        $project= DB::table('proyectos')->where('id',$request->id)->update(['evento_id'=>NULL]);
+
+       return json_encode("Bien");
     }
 
     /**
