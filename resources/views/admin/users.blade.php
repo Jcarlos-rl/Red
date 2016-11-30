@@ -5,16 +5,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+          <h2>Usuarios</h2>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thread>
                             <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Información</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
+                                <th class="head"><h5>Id</h5></th>
+                                <th class="head"><h5>Nombre</h5></th>
+                                <th class="head"><h5>Información</h5></th>
+                                <th class="head"><h5>Editar</h5></th>
+                                <th class="head"><h5>Eliminar</h5></th>
                             </tr>
                         </thread>
                         <tbody>
@@ -36,15 +37,28 @@
 </div>
 
 <style>
+    i.fa-plus-circle{
+      color: green;
+    }
     i.fa-plus-circle:hover{
         color:blue;
+    }
+    i.fa-pencil-square{
+      color: orange;
     }
     i.fa-pencil-square:hover{
         color:green;
     }
+    i.fa-trash{
+      color: #d9534f;
+    }
     i.fa-trash:hover{
         color:red;
     }
+    .head{
+      background-color: #5cb85c;
+      color: white; 
+    } 
 </style>
 
 

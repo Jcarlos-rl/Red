@@ -10,15 +10,16 @@
                     <button class="btn btn-success" style="width:100%;" data-toggle="modal" data-target="#crearEvento"><h4>Crear Evento</h4></button>
                 </div>
                 <div class="panel-body">
+                    <h3>Eventos</h3>
                     <table class="table table-striped">
                         <thread>
                             <tr>
-                                <th>#</th>
-                                <th>nombre</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th class="text-center">Status</th>
+                                <th class="head">Id</th>
+                                <th class="head">Nombre</th>
+                                <th class="head"></th>
+                                <th class="head"></th>
+                                <th class="head"></th>
+                                <th class="head text-center">Status</th>
                             </tr>
                         </thread>
                         <tbody>
@@ -66,6 +67,10 @@
     i.fa-trash:hover{
         color:red;
     }
+    .head{
+      background-color: #5cb85c;
+      color: white; 
+    } 
 </style>
 
 <!-- modal Crear evento-->
