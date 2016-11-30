@@ -9,7 +9,7 @@
             <h1>Nuevo Proyecto</h1>
             <div class="panel panel-default">
                 <div class="panel-body">
-                  {!! Form::open(['route'=> 'user.proyectos.store','method' => 'POST']) !!}
+                  {!! Form::open(['route'=> 'user.proyectos.store','method' => 'POST', 'files' => true]) !!}
                   <div class="form-group">
                     {!! Form::label('Nombre', 'Nombre') !!}
                     {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre...']) !!}
@@ -20,7 +20,7 @@
                   </div>
                   <div class="form-group">
                     {!! Form::label('Imagen','Imagen')!!}
-                    <input type="file" class="form-control" name="imagen">                    
+                    <input type="file" class="form-control" name="imagenProyecto">                    
                   </div>
                   <br>
                     <br>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Mail;
 use Session;
 use redirect;
@@ -44,11 +45,22 @@ class ProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request-> all());
-        $Proyecto = new Proyecto($request-> all());
-        $Proyecto -> save();
-        $Proyecto->users()->attach(Auth::user(),['rol' => 'ROLE_LEADER', 'status' => 'ACCEPTED']);
-        return redirect()-> route('user.proyectos.index');
+        //dd($request->all());
+        $nombreImagen = "";
+        if($request->hasFile('imagenProyecto'))
+        {
+            $nombreImagen = $request->file('imagenProyecto')->getClientOriginalName();
+            $request->file('imagenProyecto')->move(base_path() . '/public/imagenesProyectos/', $nombreImagen);
+        }
+
+        DB::table('proyectos')->insert([
+                    'nombre' => $request->nombre,
+               'descripcion' => $request->descripcion,
+            'imagenProyecto' => $nombreImagen
+        ]);
+
+
+        return redirect('/user/proyectos');
     }
 
     /**
