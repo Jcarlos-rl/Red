@@ -52,17 +52,19 @@ Route::post('/user/evento/agregarEvento',['middleware' => 'auth', 'uses' => 'Eve
 Route::post('/user/evento/sacarProyecto',['middleware' => 'auth', 'uses' => 'EventoController@sacarProyecto']);
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
-	Route::resource('proyectos','ProyectosController');
-	Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUsers']);
-	Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
-	Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
+  Route::resource('proyectos','ProyectosController');
+  Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUsers']);
+  Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
+  Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
+  Route::post('/proyecto/sacarProyecto', ['as'=>'user.proyecto.sacarProyecto', 'uses' => 'ProyectosController@sacarProyecto']);
+  Route::delete('proyecto/eliminarColaborador/{idUser}/{idProyecto}', ['as'=>'user.proyecto.eliminarColaborador', 'uses' => 'ProyectosController@eliminarColaborador']);
 });
-
+/*
 Route::post('/proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUser']);
 Route::post('/proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 Route::post('/proyecto/sacarProyecto', ['as'=>'user.proyecto.sacarProyecto', 'uses' => 'ProyectosController@sacarProyecto']);
 
-
+*/
 /*
     Rutas de ADMIN
 */

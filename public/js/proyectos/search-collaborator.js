@@ -46,8 +46,8 @@ $(document).ready(function(){
     $('#collaborators').on( "click", "button", function(e) {
         var fila = $(this).parents('tr');
         var id = fila.attr('id');
-        var email = $(this).parents('div').attr('id');
-        var nombre = $(this).siblings('span').html();
+        var email = $(this).parents('.row').attr('id');
+        var nombre = $(this).parent().siblings('.col-md-9').children('span').html();
         if ($('#selectedCollaborators > #'+id).length == 0) {
           $('#selectedCollaborators').append(templateColaborador(id, email, nombre, 'x', 'danger'));
         }
