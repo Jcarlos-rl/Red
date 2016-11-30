@@ -32,7 +32,9 @@ class EventoController extends Controller
      }
 
      public function verProyectos(Request $request, $id){
-        $proyectos = Proyecto::orderBy('id','ASC')->where('evento_id',$id)->where('status','ACCEPTED')->paginate(5);   
+
+        $proyectos = DB::table('proyectos')->select('*')->get();
+
         return view('users/Evento/proyectos')->with('proyectos', $proyectos);
      }
     public function index()

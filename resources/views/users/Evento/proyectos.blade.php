@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
- @if($proyectos->isEmpty())
+ @if(empty($proyectos))
     <div class="container">
         <h2>Proyectos</h2>
         <th>Este evento todavia no tiene proyectos</th>
@@ -36,9 +36,8 @@
                             
                         </tbody>
                     </table>
-                    {!! $proyectos->render() !!}
                     
-                    
+
                 </div>
             </div>
         </div>
