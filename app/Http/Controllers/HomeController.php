@@ -123,6 +123,7 @@ class HomeController extends Controller
         return "OK";
     }
 
+
     public function getListaDestinatarios()
     {
        $usuarios =  DB::table('users')->select('*')->get();
@@ -181,4 +182,5 @@ class HomeController extends Controller
         ]);
         return json_encode($mensaje);
     }
+
 }

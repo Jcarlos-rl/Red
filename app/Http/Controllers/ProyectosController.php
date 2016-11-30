@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Mail;
-use Session;
-use redirect;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Proyecto;
 use App\User;
@@ -23,9 +21,13 @@ class ProyectosController extends Controller
      */
     public function index()
     {
-      $proyectos = Auth::user()->proyectos()->orderBy('id', 'ASC')->paginate(5);
+      $proyectos = Auth::user()->proyectos()
+        ->leftJoin('eventos', 'eventos.id', '=', 'proyectos.evento_id')
+        ->orderBy('id', 'ASC')
+        ->select('eventos.nombre as eventoNombre','proyectos.id','proyectos.nombre','proyectos.descripcion')
+        ->paginate(5);
       return view('users/Proyecto/listProyectos')->with('proyectos', $proyectos);
-    }
+  }
 
     /**
      * Show the form for creating a new resource.
@@ -168,17 +170,43 @@ class ProyectosController extends Controller
         $project = Proyecto::find($request->idProyecto);
         foreach ($request->idsUsuarios as $idUser) {
           $user = User::find($idUser);
+          $userLocal = Auth::user();
+          Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
+          {
+            $mensaje->to($user->email)
+                    ->subject('Invitación de colaboración de proyecto')
+                    ->from('betomax1636@gmail.com','Red Colaborativa');
+          });
           $user->proyectos()->attach($project);
         }
         return 'Invitacion enviada';
       }
     }
 
+    public function revisarSolicitud($value, $idUser, $idProyecto)
+    {
+      $proyecto = Proyecto::find($idProyecto);
+      $colaborador = $proyecto->users()->find($idUser);
+      if ($colaborador->pivot->status == 'WAITING') {
+        $proyecto->users()->detach($colaborador);
+        $proyecto->users()->attach($colaborador, ['status' => $value]);
+        return redirect()->route('welcome');
+      }
+      else {
+        return view('users/Proyecto/SolicitudColaborador/negacion');
+      }
+    }
+
     public function prueba()
     {
-      Mail::send('Email.index',[],function ($mensaje)
+      $project = Proyecto::find(5);
+      $user = User::find(1);
+      $userLocal = Auth::user();
+      Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
       {
-        $mensaje->to('appjak34@gmail.com');
+        $mensaje->to($user->email)
+                ->subject('Invitación de colaboración de proyecto')
+                ->from('betomax1636@gmail.com','Red Colaborativa');
       });
     }
 }
