@@ -5,49 +5,51 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+            <h2>Proyectos</h2>
             <div class="panel panel-default">
-				<div class="panel-heading">
-                    
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thread>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th></th>
-                                <th class="text-center">Status</th>                              
-                            </tr>
-                        </thread>
-                        <tbody>
-                            @foreach($proyectos as $proyecto)
-                                <tr class="rowsTabla">
-                                    <th scope="row">{{$proyecto->id}}</th>
-                                    <th>{{$proyecto->nombre}}</th>
-                                    <th><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$proyecto->id}}"></i></th>                                    
-									<th class="text-center">
-                                        <!-- Single button -->
-                                        <div class="btn-group">
-                                        <button type="button" class="btn statusBtn" id="{{$proyecto->id}}" value="{{$proyecto->status}}">
-                                           <i class="fa fa-bullseye" aria-hidden="true"></i>
-                                        </button>
-                                        </div>
-                                    </th>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th class="head"><h5>Id</h5></th>
+                            <th class="head"><h5>Nombre</h5></th>
+                            <th class="head"></th>
+                            <th class="head text-center"><h5>Status</h5></th>                              
+                        </tr>
+                    </thread>
+                    <tbody>
+                        @foreach($proyectos as $proyecto)
+                        <tr class="rowsTabla">
+                            <th scope="row">{{$proyecto->id}}</th>
+                            <th>{{$proyecto->nombre}}</th>
+                                <th><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$proyecto->id}}"></i></th>                                    
+								<th class="text-center">
+                                <!-- Single button -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn statusBtn" id="{{$proyecto->id}}" value="{{$proyecto->status}}">
+                                        <i class="fa fa-bullseye" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
 <style>
+    i.fa-plus-circle{
+      color: green;
+    }
     i.fa-plus-circle:hover{
         color:blue;
     }
-  
+    .head{
+      background-color: #5cb85c;
+      color: white; 
+    } 
 </style>
 
 <!-- modal informacion proyecto-->

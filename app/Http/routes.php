@@ -44,11 +44,12 @@ Route::get('/user/proyecto/ver/{id}',['middleware'=>'auth','uses'=>'EventoContro
 Route::get('/user/evento/{id}/getInformacion',['middleware'=>'auth','uses'=>'AdminController@getInfoEvento']);
 Route::get('/user/evento/{id}/proyecto',['middleware'=>'auth','uses'=>'EventoController@verProyectos']);
 Route::get('/user/evento/proyecto/{id}',['middleware'=>'auth','uses'=>'EventoController@verProyecto']);
+
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
-  Route::resource('proyectos','ProyectosController');
-  Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUsers']);
-  Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
-  Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
+	Route::resource('proyectos','ProyectosController');
+	Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUsers']);
+	Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
+	Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
 });
 Route::get('email', 'ProyectosController@prueba');
 /*
