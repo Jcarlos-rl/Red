@@ -103,7 +103,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" style="width:100%;" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" style="width:100%;" data-dismiss="modal"><h4>Cerrar</h4></button>
       </div>
     </div>
   </div>

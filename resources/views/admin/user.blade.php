@@ -33,7 +33,7 @@
 						
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button id="guardarCambios" type="button" class="btn btn-primary form-control" >Guardar Cambios</button>
+                                <button id="guardarCambios" type="button" class="btn btn-success form-control" >Guardar Cambios</button>
                             </div>
                         </div>
                     </form>
