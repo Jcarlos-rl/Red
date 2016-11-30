@@ -15,7 +15,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                   <h3>Descripción</h3>
-                  <textarea name="descripcion" rows="16" cols="80" readonly>{{$proyecto->descripcion}}</textarea>
+                  <textarea name="descripcion" rows="11" cols="80" readonly>{{$proyecto->descripcion}}</textarea>
                 </div>
             </div>
         </div>
