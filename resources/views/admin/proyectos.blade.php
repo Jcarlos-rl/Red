@@ -99,7 +99,7 @@
                             '</div>'+
 							'<div class="row">'+
                                 '<div class="col-sm-12">'+
-                                    '<p class="lead">'+response.evento_id+'</p>'+
+                                    '<p class="lead">'+response.evento+'</p>'+
                                 '</div>'+
                             '</div>'+
                         '</div>'
