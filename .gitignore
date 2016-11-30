@@ -6,3 +6,4 @@ Homestead.json
 .env
 /public/imagenesEventos/*.*
 /public/imagenesPerfil/*.*
+/public/imagenesProyectos/*.*
