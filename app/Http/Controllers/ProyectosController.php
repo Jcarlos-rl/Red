@@ -132,7 +132,7 @@ class ProyectosController extends Controller
         foreach ($data as $user) {
           $bandera = false;
           foreach ($colaboradores as $colaborador) {
-            if ($user->id == $colaborador->id) {
+            if ($user->id == $colaborador->id && $colaborador->pivot->status == 'ACCEPTED') {
               $bandera = true;
               break;
             }
@@ -147,20 +147,34 @@ class ProyectosController extends Controller
       }
     }
 
+    private function enviarCorreo($user)
+    {
+      $userLocal = Auth::user();
+      Mail::send('Email.index',['local' => $userLocal, 'usuario' => $existe, 'proyecto' => $project],function ($mensaje) use ($user)
+      {
+        $mensaje->to($user->email)
+                ->subject('Invitación de colaboración de proyecto')
+                ->from('betomax1636@gmail.com','Red Colaborativa');
+      });
+    }
+
     public function sendEmails(Request $request)
     {
       if ($request->ajax()) {
         $project = Proyecto::find($request->idProyecto);
         foreach ($request->idsUsuarios as $idUser) {
-          $user = User::find($idUser);
-          $userLocal = Auth::user();
-          Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
-          {
-            $mensaje->to($user->email)
-                    ->subject('Invitación de colaboración de proyecto')
-                    ->from('betomax1636@gmail.com','Red Colaborativa');
-          });
-          $user->proyectos()->attach($project);
+          $usuarios = $project->users();
+          $existe = $usuarios->find($idUser);
+          if ($existe) {
+            $usuarios -> detach($existe) ;
+            $usuarios -> attach($existe,['status' =>'WAITING']);
+            enviarCorreo($existe);
+          }
+          else {
+            $user = User::find($idUser);
+            enviarCorreo($user);
+            $user->proyectos()->attach($project);
+          }
         }
         return 'Invitacion enviada';
       }
@@ -170,7 +184,7 @@ class ProyectosController extends Controller
     {
       $proyecto = Proyecto::find($idProyecto);
       $colaborador = $proyecto->users()->find($idUser);
-      if ($colaborador->pivot->status == 'WAITING') {
+      if ($colaborador->pivot->status == 'WAITING' ) {
         $proyecto->users()->detach($colaborador);
         $proyecto->users()->attach($colaborador, ['status' => $value]);
         return redirect()->route('welcome');
@@ -184,12 +198,20 @@ class ProyectosController extends Controller
     {
       $project = Proyecto::find(5);
       $user = User::find(1);
-      $userLocal = Auth::user();
-      Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
+      //$userLocal = Auth::user();
+      Mail::send('Email.index',['local' => $user, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
       {
         $mensaje->to($user->email)
                 ->subject('Invitación de colaboración de proyecto')
-                ->from('betomax1636@gmail.com','Red Colaborativa');
+                ->from('entornolaravel@gmail.com','Red Colaborativa');
       });
+    }
+
+    public function eliminarColaborador($idUser,$idProyecto)
+    {
+      $proyecto = Proyecto::find($idProyecto);
+      $user = User::find($idUser);
+      $proyecto->users()->detach($user);
+      return 'holi';
     }
 }

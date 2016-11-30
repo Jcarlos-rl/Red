@@ -48,6 +48,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
   Route::post('proyecto/buscarUsuario', ['as'=>'user.proyecto.buscarUsuario', 'uses' => 'ProyectosController@searchUsers']);
   Route::post('proyecto/buscarConocimiento', ['as'=>'user.proyecto.buscarConocimiento', 'uses' => 'ProyectosController@searchConoimientos']);
   Route::post('proyecto/enviarCorreos', ['as'=>'user.proyecto.enviarCorreos', 'uses' => 'ProyectosController@sendEmails']);
+  Route::delete('proyecto/eliminarColaborador/{idUser}/{idProyecto}', ['as'=>'user.proyecto.eliminarColaborador', 'uses' => 'ProyectosController@eliminarColaborador']);
 });
 Route::get('email', 'ProyectosController@prueba');
 Route::get('email/confirmacion/{value}/{idUser}/{idProyecto}', 'ProyectosController@revisarSolicitud');

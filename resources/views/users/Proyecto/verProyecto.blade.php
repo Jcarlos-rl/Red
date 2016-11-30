@@ -25,8 +25,8 @@
                 <div class="panel-body">
                   <h3>Buscar Colaborador</h3>
                   <div class="form-group">
-                    {!! Form::label('nombre', 'nombre') !!}
-                    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre...', 'id' => 'collaboratorText', 'autocomplete'=>'off']) !!}
+                    {!! Form::label('nombre', 'Conocimiento') !!}
+                    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Conocimiento...', 'id' => 'collaboratorText', 'autocomplete'=>'off']) !!}
                   </div>
                   <table class="table table-striped">
                     <thread>
@@ -65,11 +65,12 @@
                             <th class="text-center">Nombre</th>
                             <th class="text-center">Rol</th>
                             <th class="text-center">Status</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thread>
                     <tbody>
                       @foreach($proyecto->users as $usuario)
-                        @if($usuario->pivot->status != 'REJECTED')    
+                        @if($usuario->pivot->status != 'REJECTED')
                           <tr id="{{$usuario->id}}">
                             <th class="text-center">{{$usuario->name}}</th>
                             <th class="text-center">
@@ -80,6 +81,11 @@
                               @endif
                             </th>
                             <th class="text-center"><span class="label label-info">{{$usuario->pivot->status}}</span></th>
+                            @if($usuario->pivot->rol == 'ROLE_LEADER')
+                              <th class="text-center"><button type="button" name="button" class="btn btn-danger btn-sm disabled"><span class="glyphicon glyphicon-remove"></span></button></th>
+                            @else
+                              <th class="text-center"><button type="button" name="button" class="btn btn-danger btn-sm btn-delete"><span class="glyphicon glyphicon-remove"></span></button></th>
+                            @endif
                           </tr>
                         @endif
                       @endforeach
@@ -87,6 +93,8 @@
                   </table>
                 </div>
             </div>
+              {!! Form::open(['route' => ['user.proyecto.eliminarColaborador', 'ID_COLABORADOR', $proyecto->id], 'method' => 'DELETE', 'id' => 'form-delete']) !!}
+              {!! Form::close() !!}
         </div>
     </div>
 </div>
@@ -96,6 +104,7 @@
   <script src="{{ asset('js/jquery-ui.min.js') }}" charset="utf-8"></script>
   <script src="{{ asset('js/proyectos/search-collaborator.js') }}" charset="utf-8"></script>
   <script src="{{ asset('js/proyectos/send-invitation.js') }}" charset="utf-8"></script>
+  <script src="{{ asset('js/proyectos/deletecolaborador.js') }}" charset="utf-8"></script>
   <script type="text/javascript">
     var token = '{{ Session::token() }}';
     var template = '@include("users/templates/filaColaborador")';
