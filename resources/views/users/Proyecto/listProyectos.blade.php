@@ -14,18 +14,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h1>Proyectos</h1>
             <a href="{{route('user.proyectos.create')}}" class="btn btn-success" style="width:100%;"><h4>Crear Proyecto</h4></a>
             <div class="panel panel-default">
                 <div class="panel-body">
+                  <h3>Proyectos</h3>
                     <table class="table table-striped">
                         <thread>
                             <tr>
-                                <th class="text-center col-md-3">Nombre</th>
-                                <th class="text-center">Rol</th>
-                                <th class="text-center">Acciones</th>
-                                <th class="text-center">Evento</th>
-                                <th></th>
+                                <th class="head text-center col-md-3">Nombre</th>
+                                <th class="head text-center">Rol</th>
+                                <th class="head text-center">Acciones</th>
+                                <th class="head text-center">Evento</th>
+                                <th class="head"></th>
                             </tr>
                         </thread>
                         <tbody>
@@ -75,6 +75,12 @@
     
 
 </div>
+<style>
+.head{
+      background-color: #5cb85c;
+      color: white; 
+    }
+</style>
 @endsection
 @section('javascripts')
   <script src="{{ asset('js/bootbox.min.js') }}" charset="utf-8"></script>
