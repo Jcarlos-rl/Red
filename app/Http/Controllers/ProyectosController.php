@@ -147,7 +147,7 @@ class ProyectosController extends Controller
       }
     }
 
-    private function enviarCorreo($user)
+    private function enviarCorreo(User $user, Proyecto $project)
     {
       $userLocal = Auth::user();
       Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
@@ -162,31 +162,18 @@ class ProyectosController extends Controller
     {
       if ($request->ajax()) {
         $project = Proyecto::find($request->idProyecto);
+        $usuarios = $project->users();
         foreach ($request->idsUsuarios as $idUser) {
-          $usuarios = $project->users();
           $existe = $usuarios->find($idUser);
           if ($existe) {
             $usuarios -> detach($existe) ;
             $usuarios -> attach($existe,['status' =>'WAITING']);
             $userLocal = Auth::user();
-            Mail::send('Email.index',['local' => $userLocal, 'usuario' => $existe, 'proyecto' => $project],function ($mensaje) use ($existe)
-            {
-              $mensaje->to($existe->email)
-                      ->subject('Invitación de colaboración de proyecto')
-                      ->from('betomax1636@gmail.com','Red Colaborativa');
-            });
-            //$this->enviarCorreo($existe);
+            $this->enviarCorreo($existe, $project);
           }
           else {
             $user = User::find($idUser);
-            $userLocal = Auth::user();
-            Mail::send('Email.index',['local' => $userLocal, 'usuario' => $user, 'proyecto' => $project],function ($mensaje) use ($user)
-            {
-              $mensaje->to($user->email)
-                      ->subject('Invitación de colaboración de proyecto')
-                      ->from('betomax1636@gmail.com','Red Colaborativa');
-            });
-            //$this->enviarCorreo($user);
+            $this->enviarCorreo($user, $project);
             $user->proyectos()->attach($project);
           }
         }
