@@ -60,6 +60,13 @@ class ProyectosController extends Controller
             'imagenProyecto' => $nombreImagen
         ]);
 
+        $idProyecto = DB::table('proyectos')->where('nombre',$request->nombre)->select('id')->first();
+
+        DB::table('users_proyectos')->insert([
+                  'user_id' => Auth::user()->id,
+              'proyecto_id' => $idProyecto->id,
+                      'rol' => 'ROLE_LEADER'
+        ]);
 
         return redirect('/user/proyectos');
     }
