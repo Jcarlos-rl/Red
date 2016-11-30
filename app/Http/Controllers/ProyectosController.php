@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Mail;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Proyecto;
 use App\User;
