@@ -7,7 +7,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <button class="btn btn-success" style="width:100%;" data-toggle="modal" data-target="#crearEvento">Crear Evento</button>
+                    <button class="btn btn-success" style="width:100%;" data-toggle="modal" data-target="#crearEvento"><h4>Crear Evento</h4></button>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped">
@@ -48,11 +48,20 @@
 </div>
 
 <style>
+    i.fa-plus-circle{
+      color: green;
+    }
     i.fa-plus-circle:hover{
         color:blue;
     }
+    i.fa-pencil-square{
+      color: orange;
+    }
     i.fa-pencil-square:hover{
         color:green;
+    }
+    i.fa-trash{
+      color: #d9534f;
     }
     i.fa-trash:hover{
         color:red;
