@@ -87,7 +87,7 @@ Route::post('/admin/evento/{id}/eliminar',['middleware' => 'admin', 'uses' => 'A
 Route::get('/admin', ['middleware' => 'admin', 'uses' => 'AdminController@index']);
 Route::get('/admin/proyectos', ['middleware' => 'admin', 'uses' => 'AdminController@proyectos']);
 Route::get('/admin/proyecto/{id}/getInformacion',['middleware' => 'admin', 'uses' => 'AdminController@getInfoProyecto']);
-
+Route::post('/admin/proyecto/{id}/cambiarStatusProyecto',['middleware'=>'auth','uses'=>'AdminController@cambiarStatusProyecto']);
 /**
 ***       Admin users
 **/

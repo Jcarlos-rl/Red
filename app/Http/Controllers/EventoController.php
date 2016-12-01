@@ -33,7 +33,9 @@ class EventoController extends Controller
 
      public function verProyectos(Request $request, $id){
 
-        $proyectos = DB::table('proyectos')->select('*')->get();
+        $proyectos = DB::table('proyectos')->join('eventos','proyectos.evento_id','=','eventos.id')->where('eventos.id',$id)
+        ->where('proyectos.status','ACCEPTED')
+        ->select('proyectos.*')->get();
 
         return view('users/Evento/proyectos')->with('proyectos', $proyectos);
      }
